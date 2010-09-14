@@ -1,13 +1,1 @@
-**/tmp/*
-**/bin/*
-**/conf/*
-**/localhost/*
 **/target/*
-**/.settings/*
-**/.classpath
-**/.project
-**/.velocity.log
-**/.settings
-**/*.iml
-**/*.ipr
-**/*.log

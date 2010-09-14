@@ -13,9 +13,11 @@ import java.io.File
  */
 object App extends Application {
 
-	def call = {
-		var f = AudioFileIO.read(new File("/home/aurelien/Musique/no.mp3"))
-		var	tag = f.getTag()
-		tag.getFirst(FieldKey.ARTIST)
+	var f = AudioFileIO.read(new File("/home/aurelien/Musique/no.mp3"))
+	var tag = f.getTag()
+
+	var iterator = tag.getFields()
+	while(iterator.hasNext()) {
+		println(iterator.next().toString())
 	}
 }

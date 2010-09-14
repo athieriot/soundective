@@ -18,8 +18,6 @@ object AppTest {
  * Unit test for simple App.
  */
 class AppTest extends TestCase("app") {
-
-	println(App.call)
 	
     /**
      * Rigourous Tests :-)
