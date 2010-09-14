@@ -2,12 +2,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>fr.soundective</groupId>
-	<artifactId>music-autocomplete-parent</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Music Autocomplete Parent</name>
+	<groupId>fr.couzin</groupId>
+	<artifactId>soundective-parent</artifactId>
+	<version>0.1-SNAPSHOT</version>
+	<name>Soundective Project Parent</name>
+
+	<packaging>pom</packaging>
 
 	<modules>
-		<module>music-autocomplete-service</module>
+		<module>soundective-lib</module>
 	</modules>
 </project>
