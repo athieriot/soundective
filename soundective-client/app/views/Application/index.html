@@ -35,14 +35,16 @@
 <script type="text/javascript">
     $(document).ready(function(){
       $("#jquery_jplayer_1").jPlayer({
-        ready: function () {
-          $(this).jPlayer("setMedia", {
-            m4a: "http://www.jplayer.org/audio/m4a/Miaow-07-Bubble.m4a",
-            oga: "http://www.jplayer.org/audio/ogg/Miaow-07-Bubble.ogg"
-          });
-        },
-        swfPath: "/js",
-        supplied: "m4a, oga"
-      });
+		ready: function () {
+			$(this).jPlayer("setMedia", {
+				mp3: "http://www.jplayer.org/audio/mp3/Miaow-07-Bubble.mp3"
+			}).jPlayer("play");
+		},
+		ended: function (event) {
+			$(this).jPlayer("play");
+		},
+		swfPath: "../public/javascripts",
+		supplied: "mp3"
+	  });
     });
 </script>
