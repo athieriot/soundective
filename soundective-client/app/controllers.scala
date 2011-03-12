@@ -5,7 +5,7 @@ import play.mvc._
 
 import models.Song
 import templates.Template
-import org.soundective.SongFinder
+import org.soundective.utils.SongFinder
 
 object Application extends Controller {
     
