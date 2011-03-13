@@ -1,10 +1,9 @@
 package org.soundective.utils
 
+import builders.SongBuilderFactory
 import java.io.File
 import play.Play.configuration
 import play._
-import models.Song
-import com.mpatric.mp3agic.Mp3File
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,7 +14,8 @@ import com.mpatric.mp3agic.Mp3File
 
 object SongFinder {
 
-  var songDirectory = configuration.getProperty("soundective.song.directory")
+  val songDirectory = configuration.getProperty("soundective.song.directory")
+  val songBuilder = SongBuilderFactory.getSongBuilder(SongTypes.mp3)
 
   def defautSongFinder = findAndAddWithSongTypeFilter
 
@@ -38,11 +38,6 @@ object SongFinder {
 
 
   def addSong(file: File) {
-    Logger.info("Finded song : ")
-
-    var mp3file = new Mp3File(file.getAbsolutePath);
-    Logger.info("Artist : " + mp3file.getId3v2Tag.getArtist)
-
-    new Song(mp3file.getId3v2Tag.getTitle, 1, file.getAbsolutePath).save
+    //songBuilder.buildASong(file).save
   }
 }
