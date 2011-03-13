@@ -3,8 +3,9 @@
 # ~~~~
 
 # Home page
-GET     /                                       Application.index
-GET     /add                                    Application.add
+GET     /                                       PlayerController.index
+GET     /song.mp3                               SongsController.binarySong
+GET     /songs                                  SongsController.list
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
