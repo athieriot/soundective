@@ -5,7 +5,8 @@ package org.soundective.utils.builders
  * User: aurelien
  * Date: 13/03/11
  * Time: 17:37
- * To change this template use File | Settings | File Templates.
  */
 
-class Mp3Builder
+class Mp3SongBuilder extends SongBuilder {
+
+}

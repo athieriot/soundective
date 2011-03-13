@@ -3,9 +3,7 @@ package org.soundective.utils
 import java.io.File
 import org.junit._
 import org.junit.Assert._
-import play.Logger
 import play.test._
-import org.soundective.utils.SongFinder
 import play.Play.configuration
 
 class SongFinderTest extends UnitTest {

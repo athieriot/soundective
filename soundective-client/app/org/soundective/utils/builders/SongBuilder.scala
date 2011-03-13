@@ -8,4 +8,6 @@ package org.soundective.utils.builders
  * To change this template use File | Settings | File Templates.
  */
 
-trait SongBuilder 
+trait SongBuilder {
+
+}
