@@ -17,27 +17,22 @@ object SongFinder {
   val songDirectory = configuration.getProperty("soundective.song.directory")
   val songBuilder = SongBuilderFactory.getSongBuilder(SongTypes.mp3)
 
-  def defautSongFinder = findAndAddWithSongTypeFilter
-
-  def findAndAddWithSongTypeFilter {
+  def defaultFindAndActionWithSongTypeFilter(action: Function[File, Unit]) {
     Logger.info("Finding songs in directory : " + songDirectory)
-    findFilterAndDo(new File(songDirectory), SongFilter.songTypesFilter, addSong)
+    findFilterAndDo(new File(songDirectory), SongFilter.songTypesFilter, action)
   }
 
   def findFilterAndDo(directory: File, filter: Function[File, Boolean], action: Function[File, Unit]) {
-    directory.listFiles.foreach(file => recursiveAction(file, filter, action))
+    if(directory != null && action != null) {
+      directory.listFiles.foreach(file => recursiveAction(file, filter, action))
+    }
   }
 
   private def recursiveAction(file: File, filter: Function[File, Boolean], action: Function[File, Unit]) {
     if(file.isDirectory) {
       findFilterAndDo(file, filter, action)
     } else {
-      if(filter(file)) action(file)
+      if(filter == null || filter(file)) action(file)
     }
-  }
-
-
-  def addSong(file: File) {
-    //songBuilder.buildASong(file).save
   }
 }

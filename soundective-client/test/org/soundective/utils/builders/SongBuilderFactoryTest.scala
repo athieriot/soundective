@@ -19,4 +19,10 @@ class SongBuilderFactoryTest extends UnitTest {
     val songBuilder = SongBuilderFactory.getSongBuilder(SongTypes.mp3)
     assertTrue(songBuilder.isInstanceOf[Mp3SongBuilder])
   }
+
+  @Test
+  def getNullBuilderTest {
+    val songBuilder = SongBuilderFactory.getSongBuilder(null)
+    assertNull(songBuilder)
+  }
 }

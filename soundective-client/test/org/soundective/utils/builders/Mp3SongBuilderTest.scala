@@ -30,6 +30,12 @@ class Mp3SongBuilderTest extends UnitTest {
     val song: Song = mp3builder.buildASong(new File(testPath))
     assertNotNull(song)
     assertEquals("Something", song.name)
-    assertEquals(testPath, song.path)
+    assertEquals(new File(testPath).getAbsolutePath, song.path)
+  }
+
+  @Test
+  def buildANullSongTest {
+    val song: Song = mp3builder.buildASong(null)
+    assertNull(song)
   }
 }

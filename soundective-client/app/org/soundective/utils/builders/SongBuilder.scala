@@ -12,4 +12,5 @@ import models.Song
 
 trait SongBuilder {
 
+  def buildASong(file: File): Song
 }

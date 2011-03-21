@@ -16,6 +16,10 @@ class Mp3SongBuilder extends SongBuilder {
 
   def buildASong(file: File): Song = {
 
+    if(file == null) {
+      return null
+    }
+
     val mp3file = new Mp3File(file.getAbsolutePath)
 
     Logger.info("Starting build song : " + mp3file.getId3v2Tag.getTitle)

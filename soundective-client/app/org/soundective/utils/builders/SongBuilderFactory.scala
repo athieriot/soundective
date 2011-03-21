@@ -13,5 +13,6 @@ object SongBuilderFactory {
 
   def getSongBuilder(songType: SongTypes.Value): SongBuilder = songType match {
     case SongTypes.mp3 => new Mp3SongBuilder
+    case x => null
   }
 }
