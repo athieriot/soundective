@@ -1,6 +1,7 @@
-package org.soundective.utils.builders
+package org.soundective.utils.Builders
 
 import org.soundective.utils.SongTypes
+import org.soundective.utils.SongTypes.SongType
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,7 +12,7 @@ import org.soundective.utils.SongTypes
 
 object SongBuilderFactory {
 
-  def getSongBuilder(songType: SongTypes.Value): SongBuilder = songType match {
+  def getSongBuilder(songType: SongType): SongBuilder = songType match {
     case SongTypes.mp3 => new Mp3SongBuilder
     case x => null
   }

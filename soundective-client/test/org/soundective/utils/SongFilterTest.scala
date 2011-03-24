@@ -4,7 +4,7 @@ import java.io.File
 import org.junit._
 import org.junit.Assert._
 import play.test._
-import org.soundective.utils.SongFilter
+import org.soundective.utils.SongTypes.SongType
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,23 +14,30 @@ import org.soundective.utils.SongFilter
  */
 class SongFilterTest extends UnitTest {
 
+  val testedFilter = List(SongTypes.mp3)
+
   @Test
   def typeFilterTestTrue {
-    assertTrue(SongFilter.songTypesFilter(new File("test/songs/The Limes - Morning Noon  Night.mp3")))
+    assertTrue(SongFilter.songFilter(new File("test/songs/The Limes - Morning Noon  Night.mp3"), testedFilter))
   }
 
   @Test
   def typeFilterTestFalse {
-    assertFalse(SongFilter.songTypesFilter(new File("test/SongFinderTest.scala")))
+    assertFalse(SongFilter.songFilter(new File("test/SongFinderTest.scala"), testedFilter))
   }
 
   @Test
   def typeFilterTestDirectory {
-    assertFalse(SongFilter.songTypesFilter(new File("test/")))
+    assertFalse(SongFilter.songFilter(new File("test/"), testedFilter))
+  }
+
+  @Test
+  def typeNullFilterTest {
+    assertFalse(SongFilter.songFilter(new File("test/songs/The Limes - Morning Noon  Night.mp3"), null))
   }
 
   @Test
   def typeFilterTestNull {
-    assertFalse(SongFilter.songTypesFilter(null))
+    assertFalse(SongFilter.songFilter(null, testedFilter))
   }
 }

@@ -1,6 +1,6 @@
 import java.io.File
 import models.Song
-import org.soundective.utils.builders.{SongBuilder, SongBuilderFactory}
+import org.soundective.utils.Builders.{SongBuilder, SongBuilderFactory}
 import org.soundective.utils.{SongTypes, SongFinder}
 import play.jobs._
 import play.Logger
@@ -21,9 +21,12 @@ class Bootstrap extends Job {
     SongFinder.defaultFindAndActionWithSongTypeFilter(addSong)
   }
 
+  //TODO: Add a test for that
   def addSong(file: File) {
     var songBuilder: SongBuilder = SongBuilderFactory.getSongBuilder(SongTypes.mp3)
     var song:Song = songBuilder.buildASong(file)
-    song.save()
+
+    if(Song.findBy("name", song.name: String).isEmpty) song.save()
+    else Logger.info("The song : " + song.name + " is already present in database")
   }
 }

@@ -1,9 +1,11 @@
-package org.soundective.utils.builders
+package org.soundective.utils.Builders
 
 import models.Song
 import java.io.File
 import play.Logger
 import com.mpatric.mp3agic.Mp3File
+import org.soundective.utils.SongTypes
+import org.soundective.utils.SongTypes.SongType
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,6 +15,8 @@ import com.mpatric.mp3agic.Mp3File
  */
 
 class Mp3SongBuilder extends SongBuilder {
+
+  val songType: SongType = SongTypes.mp3
 
   def buildASong(file: File): Song = {
 
@@ -24,6 +28,6 @@ class Mp3SongBuilder extends SongBuilder {
 
     Logger.info("Starting build song : " + mp3file.getId3v2Tag.getTitle)
 
-    new Song(mp3file.getId3v2Tag.getTitle, 1, file.getAbsolutePath)
+    new Song(mp3file.getId3v2Tag.getTitle, 1, file.getAbsolutePath, songType.mime)
   }
 }

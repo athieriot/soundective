@@ -4,7 +4,7 @@
 
 # Home page
 GET     /                                       PlayerController.index
-GET     /song.mp3                               SongsController.binarySong
+GET     /song/{id}                              SongsController.binarySong
 GET     /songs                                  SongsController.list
 
 # Map static resources from the /app/public folder to the /public path

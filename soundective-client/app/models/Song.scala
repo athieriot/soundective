@@ -3,7 +3,7 @@ package models
 import play.db.jpa._
 import javax.persistence.Entity
 import java.io.File
-import com.google.gson.annotations.Expose
+import org.soundective.utils.SongTypes.SongType
 
 @Entity
 class Song (
@@ -12,7 +12,10 @@ class Song (
 
   var number: Long,
 
-  var path: String
+  //TODO: Path should not appear in json response
+  var path: String,
+
+  var mimeType: String
 
 ) extends Model {
     //instance methods

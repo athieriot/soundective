@@ -1,4 +1,4 @@
-package org.soundective.utils.builders
+package org.soundective.utils.Builders
 
 import play.test.UnitTest
 import org.junit.{Before, Test}

@@ -12,14 +12,18 @@ import java.io.File
 object SongFilter {
 
   def songTypesFilter(file: File): Boolean = {
-    if(file == null || !file.exists) {
+    songFilter(file, SongTypes.all)
+  }
+
+  def songFilter(file: File, filters: Seq[AnyRef]): Boolean = {
+    if(file == null || !file.exists || filters == null) {
       return false
     }
 
     var pass = false;
 
-    SongTypes.values.foreach(songType => {
-      if(file.getName.contains(songType.toString))
+    filters.foreach(filter => {
+      if(file.getName.contains(filter.toString))
         pass = true
     })
 

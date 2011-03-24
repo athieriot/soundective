@@ -1,3 +1,4 @@
+import models.Song
 import play.test._
 import org.junit._
 
@@ -18,19 +19,19 @@ class SongsControllerTest extends FunctionalTest with Browser with Matchers {
     response shouldBeOk()
     response contentTypeShouldBe("application/json")
     response charsetShouldBe("utf-8")
-    response contentShouldBe("[" +
-                              "{" +
-                                "\"name\":\"Something\"," +
-                                "\"number\":1," +
-                                "\"path\":\"/Users/aurelien/Dropbox/sources/soundective/soundective-client/test/songs/02 - Something.mp3\"," +
-                                "\"id\":1" +
-                              "}," +
-                              "{" +
-                                "\"name\":\"Morning Noon \\u0026 Night\"," +
-                                "\"number\":1," +
-                                "\"path\":\"/Users/aurelien/Dropbox/sources/soundective/soundective-client/test/songs/The Limes - Morning Noon  Night.mp3\"," +
-                                "\"id\":2" +
-                              "}" +
-                             "]")
+
+    //TODO: FIXME: Do the test with a real pattern but plateform independant
+    //response contentShouldBe("{'name':'Something'}")
+
+  }
+
+  @Test
+  def songTest {
+    val id = 1L
+    val song = Song.findById(id).head
+
+    val response = GET("/song/" + song.id)
+    response shouldBeOk()
+    response contentTypeShouldBe(song.mimeType)
   }
 }

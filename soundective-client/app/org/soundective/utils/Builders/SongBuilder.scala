@@ -1,4 +1,4 @@
-package org.soundective.utils.builders
+package org.soundective.utils.Builders
 
 import java.io.File
 import models.Song
