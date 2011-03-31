@@ -42,18 +42,20 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-    $.ajax({
-      url: "/songs",
-      dataType: "json",
-      success: function(data) {
+    var populatePlayList = function(data) {
         var contentPlayList = $.map(data, function(element, index) {
-            return {name: element.name, free: true, mp3: "/song/" + element.id}
+            var media = {};
+            media.name = element.title;
+            media.free = true
+            media[element.songType] = "/song/" + element.id;
+
+            return media;
         });
 
         var audioPlaylist = new Playlist("1", contentPlayList, {
             ready: function() {
                 audioPlaylist.displayPlaylist();
-                audioPlaylist.playlistInit(false); // Parameter is a boolean for autoplay.
+                audioPlaylist.playlistInit(true); // Parameter is a boolean for autoplay.
             },
             ended: function() {
                 audioPlaylist.playlistNext();
@@ -61,9 +63,16 @@ $(document).ready(function() {
             play: function() {
                 $(this).jPlayer("pauseOthers");
             },
-            swfPath: "@{'/public/javascripts'}",
+            swfPath: "@{'/public/javascripts/flash'}",
             supplied: "mp3"
         });
+    }
+
+    $.ajax({
+      url: "/songs",
+      dataType: "json",
+      success: function(data) {
+        populatePlayList(data);
       }
     });
 });
