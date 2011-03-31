@@ -1,10 +1,8 @@
 package org.soundective.utils
 
-import Builders.SongBuilderFactory
-import play.Play.configuration
 import play._
-import jobs.PlayActor
-import java.io.{FileFilter, File}
+import java.io.File
+import actors.Actor
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,7 +11,7 @@ import java.io.{FileFilter, File}
  * Time: 9:54 AM
  */
 
-class SongFinder(directory: File, action: Function[File, Unit]) extends PlayActor {
+class SongFinder(directory: File, action: Function[File, Unit]) extends Actor {
 
   override def act() {
     Logger.info("Entering SongFinder Actor")

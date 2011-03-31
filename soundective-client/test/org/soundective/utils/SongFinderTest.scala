@@ -5,20 +5,29 @@ import org.junit._
 import org.junit.Assert._
 import play.test._
 import play.Play.configuration
-    /*
+
 class SongFinderTest extends UnitTest {
 
   @Test
-  def defaultFindAndCountWithAlwaysFilterTest {
+  def countSongsASynchronously {
     var count: Long = 0
-    SongFinder.findFilterAndDo(new File(configuration.getProperty("soundective.song.directory")), file => true, file => count = count + 1)
+    new SongFinder(new File(configuration.getProperty("soundective.song.directory")), file => count = count + 1).start
+
+    assertTrue(count == 0)
+  }
+
+  @Test
+  def countSongsSynchronously {
+    var count: Long = 0
+    new SongFinder(new File(configuration.getProperty("soundective.song.directory")), file => count = count + 1).act
+
     assertTrue(count > 0)
   }
 
   @Test
   def nullFindTest {
     try {
-      SongFinder.findFilterAndDo(null, null)
+      new SongFinder(null, null).act
     } catch {
       case e: Exception => fail
     }
@@ -27,9 +36,9 @@ class SongFinderTest extends UnitTest {
   }
 
   @Test
-  def findAndNullWithAlwaysFilterTest {
+  def findAndNullTest {
     try {
-      SongFinder.findFilterAndDo(new File(configuration.getProperty("soundective.song.directory")), file => true, null)
+      new SongFinder(new File(configuration.getProperty("soundective.song.directory")), null).act
     } catch {
       case e: Exception => fail
     }
@@ -38,17 +47,9 @@ class SongFinderTest extends UnitTest {
   }
 
   @Test
-  def nullFindAndCountWithAlwaysFilterTest {
+  def nullFindAndCountTest {
     var count: Long = 0
-    SongFinder.findFilterAndDo(null, file => true, file => count = count + 1)
+    new SongFinder(null, file => count = count + 1).act
     assertTrue(count == 0)
   }
-
-  @Test
-  def defaultFindAndCountWithNullFilterTest {
-    var count: Long = 0
-    SongFinder.findFilterAndDo(new File(configuration.getProperty("soundective.song.directory")), null, file => count = count + 1)
-    assertTrue(count > 0)
-  }
 }
-    */
