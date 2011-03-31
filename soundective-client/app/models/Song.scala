@@ -3,7 +3,6 @@ package models
 import play.db.jpa._
 import javax.persistence.Entity
 import java.io.File
-import org.soundective.utils.SongTypes.SongType
 
 @Entity
 class Song (

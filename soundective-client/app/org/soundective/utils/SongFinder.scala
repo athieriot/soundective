@@ -1,9 +1,10 @@
 package org.soundective.utils
 
 import Builders.SongBuilderFactory
-import java.io.File
 import play.Play.configuration
 import play._
+import jobs.PlayActor
+import java.io.{FileFilter, File}
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,27 +13,21 @@ import play._
  * Time: 9:54 AM
  */
 
-object SongFinder {
+class SongFinder(directory: File, action: Function[File, Unit]) extends PlayActor {
 
-  val songDirectory = configuration.getProperty("soundective.song.directory")
-  val songBuilder = SongBuilderFactory.getSongBuilder(SongTypes.mp3)
-
-  def defaultFindAndActionWithSongTypeFilter(action: Function[File, Unit]) {
-    Logger.info("Finding songs in directory : " + songDirectory)
-    findFilterAndDo(new File(songDirectory), SongFilter.songTypesFilter, action)
+  override def act() {
+    Logger.info("Entering SongFinder Actor")
+    recursiveAction(directory, action)
   }
 
-  def findFilterAndDo(directory: File, filter: Function[File, Boolean], action: Function[File, Unit]) {
-    if(directory != null && action != null) {
-      directory.listFiles.foreach(file => recursiveAction(file, filter, action))
-    }
-  }
+  private def recursiveAction(file: File, action: Function[File, Unit]) {
 
-  private def recursiveAction(file: File, filter: Function[File, Boolean], action: Function[File, Unit]) {
-    if(file.isDirectory) {
-      findFilterAndDo(file, filter, action)
-    } else if (file.isFile) {
-      if(filter == null || filter(file)) action(file)
+    if(file != null && file.exists && action != null) {
+      if(file.isDirectory) {
+        directory.listFiles(SongFilter).foreach(file => recursiveAction(file, action))
+      } else if (file.isFile) {
+        action(file)
+      }
     }
   }
 }

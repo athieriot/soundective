@@ -1,6 +1,6 @@
 package org.soundective.utils
 
-import java.io.File
+import java.io.{FileFilter, File}
 
 /**
  * Created by IntelliJ IDEA.
@@ -9,9 +9,9 @@ import java.io.File
  * Time: 9:54 AM
  */
 
-object SongFilter {
+object SongFilter extends FileFilter {
 
-  def songTypesFilter(file: File): Boolean = {
+  def accept(file: File): Boolean = {
     songFilter(file, SongTypes.all)
   }
 
@@ -19,6 +19,8 @@ object SongFilter {
     if(file == null || !file.exists || filters == null) {
       return false
     }
+
+    if(file.isDirectory) return true
 
     var pass = false;
 

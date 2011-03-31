@@ -28,7 +28,8 @@ class SongFilterTest extends UnitTest {
 
   @Test
   def typeFilterTestDirectory {
-    assertFalse(SongFilter.songFilter(new File("test/"), testedFilter))
+    //Must accept directories to do the loop
+    assertTrue(SongFilter.songFilter(new File("test/"), testedFilter))
   }
 
   @Test

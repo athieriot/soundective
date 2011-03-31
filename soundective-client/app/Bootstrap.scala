@@ -1,9 +1,12 @@
+import actors.Actor
 import java.io.File
 import models.Song
 import org.soundective.utils.Builders.{SongBuilder, SongBuilderFactory}
 import org.soundective.utils.{SongTypes, SongFinder}
+import play.db.jpa.JPAPlugin
 import play.jobs._
 import play.Logger
+import play.Play.configuration
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,14 +18,21 @@ import play.Logger
 @OnApplicationStart
 class Bootstrap extends Job {
 
+  val songDirectory = configuration.getProperty("soundective.song.directory")
+
   @Override
   override def doJob() {
     Logger.info("Hello ! I'm the bootstrap and i'm ready to populate database")
-    SongFinder.defaultFindAndActionWithSongTypeFilter(addSong)
+
+    var songFinder = new SongFinder(new File(songDirectory), addSong)
+    songFinder.start
+
   }
 
   //TODO: Add a test for that
   def addSong(file: File) {
+    JPAPlugin.startTx(false);
+
     var songBuilder: SongBuilder = SongBuilderFactory.getSongBuilder(SongTypes.mp3)
     var song:Song = songBuilder.buildASong(file)
 
@@ -32,5 +42,7 @@ class Bootstrap extends Job {
     } else {
       Logger.info("A problem happen during building the song : " + file.getName)
     }
+
+    JPAPlugin.closeTx(false);
   }
 }
