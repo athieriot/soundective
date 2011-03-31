@@ -8,7 +8,7 @@ import org.soundective.utils.SongTypes.SongType
 @Entity
 class Song (
 
-  var name: String,
+  var title: String,
 
   var number: Long,
 
@@ -23,10 +23,12 @@ class Song (
     //instance methods
     //var isAdmin = false
 
-    override def toString = name
+    override def toString = title
 
     def renderFile = new File(path)
 }
 
 object Song extends QueryOn[Song] {
+
+  def findByTitle(title: String) = Song.findBy("title", title)
 }
