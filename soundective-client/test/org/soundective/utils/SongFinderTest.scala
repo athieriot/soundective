@@ -16,6 +16,17 @@ class SongFinderTest extends UnitTest {
   }
 
   @Test
+  def nullFindTest {
+    try {
+      SongFinder.findFilterAndDo(null, null, null)
+    } catch {
+      case e: Exception => fail
+    }
+
+    assertTrue(true)
+  }
+
+  @Test
   def findAndNullWithAlwaysFilterTest {
     try {
       SongFinder.findFilterAndDo(new File(configuration.getProperty("soundective.song.directory")), file => true, null)

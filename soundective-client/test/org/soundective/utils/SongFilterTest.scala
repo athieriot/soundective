@@ -32,6 +32,11 @@ class SongFilterTest extends UnitTest {
   }
 
   @Test
+  def typeFilterTestNotExistDirectory {
+    assertFalse(SongFilter.songFilter(new File("patapoum"), testedFilter))
+  }
+
+  @Test
   def typeNullFilterTest {
     assertFalse(SongFilter.songFilter(new File("test/songs/The Limes - Morning Noon  Night.mp3"), null))
   }

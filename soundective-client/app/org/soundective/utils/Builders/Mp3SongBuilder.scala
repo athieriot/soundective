@@ -20,14 +20,20 @@ class Mp3SongBuilder extends SongBuilder {
 
   def buildASong(file: File): Song = {
 
-    if(file == null) {
+    if(file == null || file.length == 0) {
       return null
     }
 
-    val mp3file = new Mp3File(file.getAbsolutePath)
+    try {
+      val mp3file = new Mp3File(file.getAbsolutePath)
 
-    Logger.info("Starting build song : " + mp3file.getId3v2Tag.getTitle)
+      Logger.info("Starting build song : " + mp3file.getId3v2Tag.getTitle)
 
-    new Song(mp3file.getId3v2Tag.getTitle, 1, file.getAbsolutePath, songType.mime)
+      new Song(mp3file.getId3v2Tag.getTitle, 0, file.getAbsolutePath, songType.mime, songType.name)
+
+    } catch {
+      //TODO: FIXME: Do this better. For example, creating the song with file.name = name
+      case e: Exception => return new Song(file.getName, 0, file.getAbsolutePath, songType.mime, songType.name)
+    }
   }
 }

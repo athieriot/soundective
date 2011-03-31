@@ -26,7 +26,11 @@ class Bootstrap extends Job {
     var songBuilder: SongBuilder = SongBuilderFactory.getSongBuilder(SongTypes.mp3)
     var song:Song = songBuilder.buildASong(file)
 
-    if(Song.findBy("name", song.name: String).isEmpty) song.save()
-    else Logger.info("The song : " + song.name + " is already present in database")
+    if(song != null) {
+      if(Song.findBy("name", song.name: String).isEmpty) song.save()
+      else Logger.info("The song : " + song.name + " is already present in database")
+    } else {
+      Logger.info("A problem happen during building the song : " + file.getName)
+    }
   }
 }

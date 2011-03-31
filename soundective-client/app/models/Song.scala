@@ -15,7 +15,9 @@ class Song (
   //TODO: Path should not appear in json response
   var path: String,
 
-  var mimeType: String
+  var mimeType: String,
+
+  var songType: String
 
 ) extends Model {
     //instance methods

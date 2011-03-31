@@ -45,7 +45,7 @@ $(document).ready(function() {
     var populatePlayList = function(data) {
         var contentPlayList = $.map(data, function(element, index) {
             var media = {};
-            media.name = element.title;
+            media.name = element.name;
             media.free = true
             media[element.songType] = "/song/" + element.id;
 

@@ -31,7 +31,7 @@ object SongFinder {
   private def recursiveAction(file: File, filter: Function[File, Boolean], action: Function[File, Unit]) {
     if(file.isDirectory) {
       findFilterAndDo(file, filter, action)
-    } else {
+    } else if (file.isFile) {
       if(filter == null || filter(file)) action(file)
     }
   }
