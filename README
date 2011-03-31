@@ -1,7 +1,27 @@
 Purpose of this project :
 
    - Have fun
-   - Learn Scala, Javascript, MongoDB and more
-   - Write a web client to handle musics collection, listen files, organize, etc... Deezer/Spotify @ home
+   - Learn Scala, Javascript, MongoDB and more, and more...
 
+Goal :
 
+    Soundective is web based Music Player capable of deal with your personnal music collection
+    Listen files, organize, search for more informations on internet, etc...
+    Like Deezer/Spotify at home
+    But in difference, I want to make these services bi-directionals : All new informations found on your songs can be rewrite in the file. 
+
+Next steps :
+
+    - Show realtime informations on the database initialisation
+    - Show a scrollable column with all available properties of songs (covert image, etc...)
+    - Refactor Builders with more Types (Change mp3agic library?)
+    - Keep code coverage nice
+
+Usage :
+
+    - Install Play ! Framework
+    - Install Scala Module : play install scala
+    - Extract files
+    - Adapt soundective.song.directory property in conf/application.conf if you want
+    - Then type : play run
+    - And your application will be available at http://localhost:9000
