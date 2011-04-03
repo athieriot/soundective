@@ -1,6 +1,6 @@
 import java.io.File
 import models.Song
-import org.soundective.utils.Builders.{SongBuilder, SongBuilderFactory}
+import org.soundective.utils.builders.{SongBuilder, SongBuilderFactory}
 import org.soundective.utils.{SongTypes, SongFinder}
 import play.db.jpa.JPAPlugin
 import play.jobs._
@@ -29,6 +29,7 @@ class Bootstrap extends Job {
   }
 
   //TODO: Add a test for that
+
   def addSong(file: File) {
     JPAPlugin.startTx(false);
 

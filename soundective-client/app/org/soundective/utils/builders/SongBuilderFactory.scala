@@ -1,4 +1,4 @@
-package org.soundective.utils.Builders
+package org.soundective.utils.builders
 
 import org.soundective.utils.SongTypes
 import org.soundective.utils.SongTypes.SongType
