@@ -39,6 +39,8 @@
 
 <script type="text/javascript" src="@{'/public/javascripts/Player.js'}"></script>
 
+<input id="state" type="button" value="State" />
+
 <script type="text/javascript">
 $(document).ready(function() {
 
@@ -75,5 +77,15 @@ $(document).ready(function() {
         populatePlayList(data);
       }
     });
+
+    $("#state").click(function() {
+        $.ajax({
+          url: "/finderState",
+          dataType: "json",
+          success: function(data) {
+            alert(data.files + " " + data.songs);
+          }
+        });
+    })
 });
 </script>

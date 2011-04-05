@@ -10,7 +10,6 @@ import org.junit.Assert._
  * User: aurelien
  * Date: 24/03/11
  * Time: 21:31
- * To change this template use File | Settings | File Templates.
  */
 
 class SongTypesTest extends UnitTest {

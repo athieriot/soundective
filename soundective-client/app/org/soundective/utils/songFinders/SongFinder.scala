@@ -1,8 +1,9 @@
-package org.soundective.utils
+package org.soundective.utils.songFinders
 
 import play.Logger
 import java.io.File
 import actors.Actor
+import org.soundective.utils.SongFilter
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,19 +14,34 @@ import actors.Actor
 
 class SongFinder(directory: File, action: Function[File, Unit]) extends Actor {
 
-  override def act() {
+  private var fileCounter: Long = 0
+  private var songCounter: Long = 0
+
+  override def act {
     Logger.info("Entering SongFinder Actor")
+
+    fileCounter = 0
+    songCounter = 0
+
     recursiveAction(directory, action)
   }
 
   private def recursiveAction(file: File, action: Function[File, Unit]) {
 
     if(file != null && file.exists && action != null) {
+      fileCounter = fileCounter + 1
+
       if(file.isDirectory) {
-        directory.listFiles(SongFilter).foreach(file => recursiveAction(file, action))
+        file.listFiles.foreach(child => recursiveAction(child, action))
       } else if (file.isFile) {
-        action(file)
+        if(SongFilter.accept(file)) action(file)
+
+        songCounter = songCounter + 1
       }
     }
+  }
+
+  def getDetails: Tuple2[Long, Long] = {
+    Tuple2(fileCounter, songCounter)
   }
 }

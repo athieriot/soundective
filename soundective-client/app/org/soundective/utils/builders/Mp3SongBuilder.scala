@@ -20,7 +20,7 @@ class Mp3SongBuilder extends SongBuilder {
 
   def buildASong(file: File): Song = {
 
-    if(file == null || file.length == 0) {
+    if(file == null || !file.exists || file.length == 0) {
       return null
     }
 

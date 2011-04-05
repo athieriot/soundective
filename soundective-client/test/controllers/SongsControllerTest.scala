@@ -1,3 +1,5 @@
+package controllers
+
 import models.Song
 import play.test._
 import org.junit._

@@ -12,7 +12,7 @@ Goal :
 
 Next steps :
 
-    - Show realtime informations on the database initialisation
+    - Show realtime informations on the database initialisation (Do a service)
     - Show a scrollable column with all available properties of songs (covert image, etc...)
     - Refactor Builders with more Types (Change mp3agic library?)
     - Keep code coverage nice

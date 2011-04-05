@@ -6,6 +6,7 @@
 GET     /                                       PlayerController.index
 GET     /song/{id}                              SongsController.binarySong
 GET     /songs                                  SongsController.list
+GET     /finderState                            SongFinderController.finderState
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
