@@ -14,6 +14,8 @@ import play.test._
 
 class SongFinderFactoryTest extends UnitTest {
 
+  private val time_pause = 50
+
   //TODO: Reactive this test when stopping will be possible
   /*@Test
   def getSongFingerDetailsNullTest {
@@ -27,9 +29,8 @@ class SongFinderFactoryTest extends UnitTest {
 
   @Test
   def getSongFingerDetailsTest {
-    var songFinderTest = SongFinderFactory.getSongFinder
-    songFinderTest.start
-    pause(10)
+    SongFinderFactory.getSongFinder.start
+    pause(time_pause)
 
     assertNotNull(SongFinderFactory.getSongFinderDetails)
     assertTrue(SongFinderFactory.getSongFinderDetails.isInstanceOf[Tuple2[Long, Long]])

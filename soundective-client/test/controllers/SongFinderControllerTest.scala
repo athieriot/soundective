@@ -19,6 +19,7 @@ class SongFinderControllerTest extends FunctionalTest with Browser with Matchers
     response shouldBeOk()
     response contentTypeShouldBe("application/json")
     response charsetShouldBe("utf-8")
+    response contentShouldBe("{files: 9, songs: 6}")
   }
 
   /* TODO: A test for when we'll be able to control finding

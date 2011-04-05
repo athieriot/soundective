@@ -8,10 +8,13 @@ import play.Play.configuration
 
 class SongFinderTest extends UnitTest {
 
+  //TODO: An alternative to time_pause need to be find
+  private val time_pause = 50
+
   @Test
   def countSongsASynchronously {
     var count: Long = 0
-    new SongFinder(new File(configuration.getProperty("soundective.song.directory")), file => count = count + 1).start
+    new SongFinder(new File(configuration.getProperty("soundective.song.directory")), file => {count = count + 2; pause(time_pause)}).start
 
     assertTrue(count == 0)
   }
@@ -20,7 +23,7 @@ class SongFinderTest extends UnitTest {
   def songFinderDetailsTest {
     var songFinderTest = new SongFinder(new File(configuration.getProperty("soundective.song.directory")), file => None)
     songFinderTest.start
-    pause(50)
+    pause(time_pause)
 
     var result = songFinderTest.getDetails
     assertNotNull(result)
@@ -32,7 +35,7 @@ class SongFinderTest extends UnitTest {
   def countSongsAndWait {
     var count: Long = 0
     new SongFinder(new File(configuration.getProperty("soundective.song.directory")), file => count = count + 1).start
-    pause(50)
+    pause(time_pause)
 
     assertTrue(count > 1)
   }

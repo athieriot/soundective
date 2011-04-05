@@ -1,0 +1,8 @@
+# Test songs
+
+Song(something):
+    title:  "Something"
+    number: "1"
+    path:   "test/songs/02 - Something.mp3"
+    mimeType: "audio/mpeg"
+    songType: "mp3"

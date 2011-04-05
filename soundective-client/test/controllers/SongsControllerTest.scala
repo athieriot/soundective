@@ -13,27 +13,37 @@ import org.junit._
 
 class SongsControllerTest extends FunctionalTest with Browser with Matchers {
 
+  private val title = "Something"
+  private var songToTest: Song = null;
+
+  @Before
+  def setUp {
+    Fixtures.deleteAll
+    Fixtures.load("songs/fixtures/songs.yml")
+
+    songToTest = Song.findByTitle(title).head
+  }
+
   @Test
   def songsTest {
-    //Two songs in test : Something, Morning Noon & Night
+    //One songs in test : Something
 
     val response = GET("/songs")
     response shouldBeOk()
     response contentTypeShouldBe("application/json")
     response charsetShouldBe("utf-8")
-
-    //TODO: FIXME: Do the test with a real pattern but plateform independant
-    //response contentShouldBe("{'name':'Something'}")
-
+    response contentShouldBe("[{\"title\":\"" + songToTest.title + "\"," +
+                              "\"number\":" + songToTest.number + "," +
+                              "\"path\":\"" + songToTest.path + "\"," +
+                              "\"mimeType\":\"" + songToTest.mimeType + "\"," +
+                              "\"songType\":\"" + songToTest.songType + "\"," +
+                              "\"id\":" + songToTest.id + "}]")
   }
 
   @Test
   def songTest {
-    val id = 1L
-    val song = Song.findById(id).head
-
-    val response = GET("/song/" + song.id)
+    val response = GET("/song/" + songToTest.id)
     response shouldBeOk()
-    response contentTypeShouldBe(song.mimeType)
+    response contentTypeShouldBe(songToTest.mimeType)
   }
 }

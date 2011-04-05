@@ -15,6 +15,7 @@ Next steps :
     - Show realtime informations on the database initialisation (Do a service)
     - Show a scrollable column with all available properties of songs (covert image, etc...)
     - Refactor Builders with more Types (Change mp3agic library?)
+    - Fulltext search
     - Keep code coverage nice
 
 Usage :
@@ -23,5 +24,5 @@ Usage :
     - Install Scala Module : play install scala
     - Extract files
     - Adapt soundective.song.directory property in conf/application.conf if you want
-    - Then type : play run
+    - Then type : play run --%prod
     - And your application will be available at http://localhost:9000

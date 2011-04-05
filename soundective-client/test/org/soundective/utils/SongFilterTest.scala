@@ -17,6 +17,11 @@ class SongFilterTest extends UnitTest {
   val testedFilter = List(SongTypes.mp3)
 
   @Test
+  def acceptTestTrue {
+    assertTrue(SongFilter.accept(new File("test/songs/The Limes - Morning Noon  Night.mp3")))
+  }
+
+  @Test
   def typeFilterTestTrue {
     assertTrue(SongFilter.songFilter(new File("test/songs/The Limes - Morning Noon  Night.mp3"), testedFilter))
   }

@@ -29,5 +29,7 @@ class Song (
 
 object Song extends QueryOn[Song] {
 
-  def findByTitle(title: String) = Song.findBy("title", title)
+  def findByAsScala(s: String, a: Any) = (asScala.asList(findBy(s, a)).asInstanceOf[List[Song]])
+
+  def findByTitle(title: String) = findByAsScala("title", title)
 }
