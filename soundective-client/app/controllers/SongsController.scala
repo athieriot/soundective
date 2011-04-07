@@ -3,8 +3,8 @@ package controllers
 import play.mvc._
 import models.Song
 import play.Logger
-import org.soundective.utils.serializer.ScalaGsonSerializer
 import results.{RenderBinary, NotFound, RenderJson}
+import play.modules.soundective.core.utils.serializer.ScalaGsonSerializer
 
 object SongsController extends Controller {
 
