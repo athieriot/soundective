@@ -1,10 +1,11 @@
-package org.soundective.utils.songFinders
+package play.modules.soundective.core.utils.songFinders
 
 import java.io.File
 import org.junit._
 import org.junit.Assert._
 import play.test._
 import play.Play.configuration
+import play.modules.soundective.core.utils.songFinders.SongFinder
 
 class SongFinderTest extends UnitTest {
 

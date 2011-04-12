@@ -1,11 +1,12 @@
 package org.soundective.utils.songFinders
 
-import play.db.jpa.JPAPlugin
+import play.modules.soundective.core.utils.songFinders.SongFinder
 import play.Logger
-import models.Song
-import org.soundective.utils.builders.{SongBuilder, SongBuilderFactory}
 import java.io.File
-import org.soundective.utils.{SongTypes}
+import play.db.jpa.JPAPlugin
+import play.modules.soundective.core.utils.builders.{SongBuilderFactory, SongBuilder}
+import play.modules.soundective.core.utils.SongTypes
+import models.Song
 import play.Play.configuration
 
 /**

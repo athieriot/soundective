@@ -1,8 +1,9 @@
-package org.soundective.utils
+package play.modules.soundective.core.utils
 
 import play.test.UnitTest
 import org.junit.Test
 import org.junit.Assert._
+import play.modules.soundective.core.utils.SongTypes
 
 
 /**

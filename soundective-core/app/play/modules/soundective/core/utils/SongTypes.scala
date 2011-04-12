@@ -1,4 +1,4 @@
-package org.soundective.utils
+package play.modules.soundective.core.utils
 
 /**
  * Created by IntelliJ IDEA.

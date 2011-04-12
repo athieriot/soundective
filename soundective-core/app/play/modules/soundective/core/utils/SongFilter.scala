@@ -1,4 +1,4 @@
-package org.soundective.utils
+package play.modules.soundective.core.utils
 
 import java.io.{FileFilter, File}
 
