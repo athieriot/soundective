@@ -1,9 +1,9 @@
-package org.soundective.utils.songFinders
+package play.modules.soundective.core.utils.songFinders
 
 import play.Logger
 import java.io.File
 import actors.Actor
-import org.soundective.utils.SongFilter
+import play.modules.soundective.core.utils.SongFilter
 
 /**
  * Created by IntelliJ IDEA.

@@ -1,4 +1,4 @@
-package org.soundective.utils.builders
+package play.modules.soundective.core.utils.builders
 
 import play.test.UnitTest
 import org.junit.{Before, Test}
@@ -6,6 +6,7 @@ import java.io.File
 import org.junit.Assert._
 import models.Song
 import play.Play.configuration
+import play.modules.soundective.core.utils.builders.Mp3SongBuilder
 
 /**
  * Created by IntelliJ IDEA.

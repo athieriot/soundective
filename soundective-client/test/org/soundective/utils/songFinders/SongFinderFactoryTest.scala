@@ -1,9 +1,9 @@
 package org.soundective.utils.songFinders
 
-import play.test.UnitTest
 import org.junit._
 import org.junit.Assert._
 import play.test._
+import play.modules.soundective.core.utils.songFinders.SongFinder
 
 /**
  * Created by IntelliJ IDEA.

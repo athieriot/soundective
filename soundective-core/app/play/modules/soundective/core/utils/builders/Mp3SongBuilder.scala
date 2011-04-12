@@ -1,11 +1,11 @@
-package org.soundective.utils.builders
+package play.modules.soundective.core.utils.builders
 
 import models.Song
 import java.io.File
 import play.Logger
 import com.mpatric.mp3agic.Mp3File
-import org.soundective.utils.SongTypes
-import org.soundective.utils.SongTypes.SongType
+import play.modules.soundective.core.utils.SongTypes
+import play.modules.soundective.core.utils.SongTypes.SongType
 
 /**
  * Created by IntelliJ IDEA.

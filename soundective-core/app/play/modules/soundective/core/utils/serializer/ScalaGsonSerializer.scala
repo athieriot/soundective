@@ -1,4 +1,4 @@
-package org.soundective.utils.serializer
+package play.modules.soundective.core.utils.serializer
 
 import com.google.gson._
 
@@ -31,3 +31,4 @@ JsonSerializer[scala.collection.immutable.$colon$colon[_]] {
     return json
   }
 }
+

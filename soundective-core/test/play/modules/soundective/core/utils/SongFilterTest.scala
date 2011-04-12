@@ -1,10 +1,9 @@
-package org.soundective.utils
+package play.modules.soundective.core.utils
 
 import java.io.File
 import org.junit._
 import org.junit.Assert._
 import play.test._
-import org.soundective.utils.SongTypes.SongType
 
 /**
  * Created by IntelliJ IDEA.
