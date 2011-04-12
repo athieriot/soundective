@@ -1,6 +1,6 @@
-import org.soundective.utils.songFinders.SongFinderFactory
 import play.jobs._
 import play.Logger
+import services.SongFinderFactory
 
 /**
  * Created by IntelliJ IDEA.

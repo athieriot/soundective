@@ -5,7 +5,6 @@ import org.junit._
 import org.junit.Assert._
 import play.test._
 import play.Play.configuration
-import play.modules.soundective.core.utils.songFinders.SongFinder
 
 class SongFinderTest extends UnitTest {
 

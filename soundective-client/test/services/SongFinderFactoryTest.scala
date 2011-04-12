@@ -1,4 +1,4 @@
-package org.soundective.utils.songFinders
+package services
 
 import org.junit._
 import org.junit.Assert._

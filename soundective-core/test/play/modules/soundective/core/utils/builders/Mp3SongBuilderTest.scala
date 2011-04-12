@@ -6,7 +6,6 @@ import java.io.File
 import org.junit.Assert._
 import models.Song
 import play.Play.configuration
-import play.modules.soundective.core.utils.builders.Mp3SongBuilder
 
 /**
  * Created by IntelliJ IDEA.

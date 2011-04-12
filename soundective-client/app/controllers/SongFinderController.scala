@@ -1,7 +1,7 @@
 package controllers
 
 import play.mvc.Controller
-import org.soundective.utils.songFinders.SongFinderFactory
+import services.SongFinderFactory
 
 /**
  * Created by IntelliJ IDEA.

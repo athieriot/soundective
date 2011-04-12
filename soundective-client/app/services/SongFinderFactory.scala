@@ -1,4 +1,4 @@
-package org.soundective.utils.songFinders
+package services
 
 import play.modules.soundective.core.utils.songFinders.SongFinder
 import play.Logger

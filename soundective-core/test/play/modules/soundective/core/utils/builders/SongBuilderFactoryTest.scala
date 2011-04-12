@@ -4,7 +4,6 @@ import org.junit.Assert._
 import play.test._
 import org.junit.Test
 import play.modules.soundective.core.utils.SongTypes
-import play.modules.soundective.core.utils.builders.{Mp3SongBuilder, SongBuilderFactory}
 
 /**
  * Created by IntelliJ IDEA.
