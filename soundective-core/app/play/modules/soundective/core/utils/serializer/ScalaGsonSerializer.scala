@@ -21,3 +21,14 @@ object ScalaGsonSerializer {
 
 }
 
+class CollectionSerializer extends
+JsonSerializer[scala.collection.immutable.$colon$colon[_]] {
+  override def serialize(items: scala.collection.immutable.$colon$colon[_],
+                         objType: java.lang.reflect.Type,
+                         context: JsonSerializationContext): JsonElement = {
+    val json = new JsonArray()
+    items.foreach(item => json.add(context.serialize(item)))
+    return json
+  }
+}
+
