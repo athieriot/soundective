@@ -1,91 +1,77 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-<div id="jquery_jplayer_1" class="jp-jplayer"></div>
-<div class="jp-audio">
-    <div class="jp-type-playlist">
-        <div id="jp_interface_1" class="jp-interface">
-            <ul class="jp-controls">
-                <li><a href="#" class="jp-play" tabindex="1">play</a></li>
-                <li><a href="#" class="jp-pause" tabindex="1">pause</a></li>
-                <li><a href="#" class="jp-stop" tabindex="1">stop</a></li>
-                <li><a href="#" class="jp-mute" tabindex="1">mute</a></li>
-
-                <li><a href="#" class="jp-unmute" tabindex="1">unmute</a></li>
-                <li><a href="#" class="jp-previous" tabindex="1">previous</a></li>
-                <li><a href="#" class="jp-next" tabindex="1">next</a></li>
-            </ul>
-            <div class="jp-progress">
-                <div class="jp-seek-bar">
-                    <div class="jp-play-bar"></div>
-
-                </div>
-            </div>
-            <div class="jp-volume-bar">
-                <div class="jp-volume-bar-value"></div>
-            </div>
-            <div class="jp-current-time"></div>
-            <div class="jp-duration"></div>
-        </div>
-        <div id="jp_playlist_1" class="jp-playlist">
-
+<div id="header-container">
+    <header class="wrapper">
+        <h1 id="title">Soundective Client</h1>
+        <nav>
             <ul>
-                <!-- The method Playlist.displayPlaylist() uses this unordered list -->
-                <li></li>
+                <li><a href="#">Player</a></li>
             </ul>
-        </div>
-    </div>
+        </nav>
+    </header>
 </div>
 
-<script type="text/javascript" src="@{'/public/javascripts/Player.js'}"></script>
+<div id="main" class="wrapper">
+    <aside>
+        <h3>Something aside</h3>
+    </aside>
+    <article>
+        <header>
+            <h2>The Player</h2>
 
+            <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+            <div class="jp-audio">
+                <div class="jp-type-playlist">
+                    <div id="jp_interface_1" class="jp-interface">
+                        <ul class="jp-controls">
+                            <li><a href="#" class="jp-play" tabindex="1">play</a></li>
+                            <li><a href="#" class="jp-pause" tabindex="1">pause</a></li>
+                            <li><a href="#" class="jp-stop" tabindex="1">stop</a></li>
+                            <li><a href="#" class="jp-mute" tabindex="1">mute</a></li>
+
+                            <li><a href="#" class="jp-unmute" tabindex="1">unmute</a></li>
+                            <li><a href="#" class="jp-previous" tabindex="1">previous</a></li>
+                            <li><a href="#" class="jp-next" tabindex="1">next</a></li>
+                        </ul>
+                        <div class="jp-progress">
+                            <div class="jp-seek-bar">
+                                <div class="jp-play-bar"></div>
+
+                            </div>
+                        </div>
+                        <div class="jp-volume-bar">
+                            <div class="jp-volume-bar-value"></div>
+                        </div>
+                        <div class="jp-current-time"></div>
+                        <div class="jp-duration"></div>
+                    </div>
+                    <div id="jp_playlist_1" class="jp-playlist">
+
+                        <ul>
+                            <!-- The method Playlist.displayPlaylist() uses this unordered list -->
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <h3>The Song</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas tempor. Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper consequat est, eu porta velit mollis nec. Curabitur posuere enim eget turpis feugiat tempor. Etiam ullamcorper lorem dapibus velit suscipit ultrices. Proin in est sed erat facilisis pharetra. Pellentesque auctor neque quis nisl lacinia id rutrum lacus venenatis.</p>
+
+        <footer>
+            <h3>About the author</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas tempor. Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper consequat est, eu porta velit mollis nec. Curabitur posuere enim eget turpis feugiat tempor.</p>
+        </footer>
+
+    </article>
+</div>
 <input id="state" type="button" value="State" />
 
-<script type="text/javascript">
-$(document).ready(function() {
 
-    var populatePlayList = function(data) {
-        var contentPlayList = $.map(data, function(element, index) {
-            var media = {};
-            media.name = element.title;
-            media.free = true
-            media[element.songType] = "/song/" + element.id;
-
-            return media;
-        });
-
-        var audioPlaylist = new Playlist("1", contentPlayList, {
-            ready: function() {
-                audioPlaylist.displayPlaylist();
-                audioPlaylist.playlistInit(true); // Parameter is a boolean for autoplay.
-            },
-            ended: function() {
-                audioPlaylist.playlistNext();
-            },
-            play: function() {
-                $(this).jPlayer("pauseOthers");
-            },
-            swfPath: "@{'/public/javascripts/flash'}",
-            supplied: "mp3"
-        });
-    }
-
-    $.ajax({
-      url: "/songs",
-      dataType: "json",
-      success: function(data) {
-        populatePlayList(data);
-      }
-    });
-
-    $("#state").click(function() {
-        $.ajax({
-          url: "/finderState",
-          dataType: "json",
-          success: function(data) {
-            alert(data.files + " " + data.songs);
-          }
-        });
-    })
-});
-</script>
+<div id="footer-container">
+    <footer class="wrapper">
+        <h3>A nice footer</h3>
+    </footer>
+</div>

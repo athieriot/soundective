@@ -5,14 +5,13 @@ Purpose of this project :
 
 Goal :
 
-    Soundective is web based Music Player capable of deal with your personnal music collection
+    Soundective is a web based Music Player capable of deal with your personnal music collection
     Listen files, organize, search for more informations on internet, etc...
     Like Deezer/Spotify at home
     But in difference, I want to make these services bi-directionals : All new informations found on your songs can be rewrite in the file. 
 
 Next steps :
 
-    - Show realtime informations on the database initialisation (Do a service)
     - Show a scrollable column with all available properties of songs (covert image, etc...)
     - Refactor Builders with more Types (Change mp3agic library?)
     - Fulltext search
@@ -21,8 +20,7 @@ Next steps :
 Usage :
 
     - Install Play ! Framework
-    - Install Scala Module : play install scala
     - Extract files
     - Adapt soundective.song.directory property in conf/application.conf if you want
-    - Then type : play run --%prod
+    - Then type : play run --%prod --deps
     - And your application will be available at http://localhost:9000

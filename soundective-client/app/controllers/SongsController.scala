@@ -17,6 +17,7 @@ object SongsController extends Controller {
   }
 
   def list = {
+    //TODO: We don't have to log this each time in info...
     Logger.info("Your are in the SongsController and there are " + Song.count.toString + " songs in the database")
 
     songJson(Song.findAll)
