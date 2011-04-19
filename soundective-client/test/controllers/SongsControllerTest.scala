@@ -18,8 +18,8 @@ class SongsControllerTest extends FunctionalTest with Browser with Matchers {
 
   @Before
   def setUp {
-    Fixtures.deleteAll
-    Fixtures.load("songs/fixtures/songs.yml")
+    Fixtures.deleteAllModels
+    Fixtures.loadModels("songs/fixtures/songs.yml")
 
     songToTest = Song.findByTitle(title).head
   }

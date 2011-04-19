@@ -1,7 +1,7 @@
 package models
 
 import play.db.jpa._
-import javax.persistence.Entity
+import javax.persistence._
 import java.io.File
 
 @Entity
@@ -29,7 +29,7 @@ class Song (
 
 object Song extends QueryOn[Song] {
 
-  def findByAsScala(s: String, a: Any) = (asScala.asList(findBy(s, a)).asInstanceOf[List[Song]])
+  def findByAsScala(s: String, a: Any) = Song.findBy(s, a).asInstanceOf[List[Song]]
 
   def findByTitle(title: String) = findByAsScala("title", title)
 }

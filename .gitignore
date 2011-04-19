@@ -2,6 +2,12 @@ target/
 .project/
 .classpath
 .idea/
-.iml
+*.iml
 out/
 precompiled/
+*.pid
+tmp/
+logs/
+lib/
+test-result/
+modules/

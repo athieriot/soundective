@@ -1,0 +1,16 @@
+# Application dependencies
+
+self: soundective -> soundective-client 0.0.1
+
+require:
+    - play 1.2
+    - play -> scala 0.9
+    - soundective -> soundective-core 0.0.1
+
+repositories:
+     - playLocal:
+         type: local
+         artifact: ${application.path}/../[module]
+         descriptor: ${application.path}/../[module]/conf/dependencies.yml
+         contains: 
+            - soundective -> *

@@ -1,6 +1,0 @@
-*.pid
-tmp/*
-*.iml
-logs/*
-lib/
-test-result/

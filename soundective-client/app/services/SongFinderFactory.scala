@@ -3,11 +3,11 @@ package services
 import play.modules.soundective.core.utils.songFinders.SongFinder
 import play.Logger
 import java.io.File
-import play.db.jpa.JPAPlugin
 import play.modules.soundective.core.utils.builders.{SongBuilderFactory, SongBuilder}
 import play.modules.soundective.core.utils.SongTypes
 import models.Song
 import play.Play.configuration
+import play.db.jpa.{JPA, JPAPlugin, Transactional}
 
 /**
  * Created by IntelliJ IDEA.
@@ -41,6 +41,7 @@ object SongFinderFactory {
   }
 
   //TODO: Add a test for that
+  //@Transactional(readOnly=true)
   def addSong(file: File) {
     JPAPlugin.startTx(false);
 
