@@ -1,6 +1,15 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
+<script id="songs" type="text/html">
+    {{#song}}
+    <li id="song-{{ id }}">
+        <span class="title">{{ title }}</span>
+        <span>({{ songType }})</span>
+    </li>
+    {{/song}}
+</script>
+
 <div id="header-container">
     <header class="wrapper">
         <h2 id="title">Soundective Client</h2>
@@ -15,6 +24,7 @@
 <div id="main" class="wrapper">
     <aside>
         <h3>Something aside</h3>
+        <div><ul id="songList"></ul></div>
     </aside>
     <article>
         <header>

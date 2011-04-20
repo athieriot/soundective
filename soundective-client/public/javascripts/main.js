@@ -1,8 +1,14 @@
-require(["Player", "models/songs", "order!external/jquery-1.4.2.min", "order!external/jquery.jplayer-2.0.0.min"], function(Player, Songs) {
+require(["Player",
+         "views/playerView",
+         "models/songs",
+         "order!external/jquery-1.4.2.min",
+         "order!external/jquery.jplayer-2.0.0.min"], function(Player, PlayerView, Songs) {
 
     $(document).ready(function(){
 
         var songs = new Songs;
+
+        var playerView = new PlayerView({model: songs});
 
         var populatePlayList = function(data) {
             var contentPlayList = data.map(function(element, index) {
@@ -33,6 +39,8 @@ require(["Player", "models/songs", "order!external/jquery-1.4.2.min", "order!ext
         songs.fetch({
             success: function(){
                 populatePlayList(songs);
+
+                $('#songList').append(playerView.render().el);
             }
         });
 
