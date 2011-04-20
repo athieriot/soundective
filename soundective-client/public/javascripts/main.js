@@ -1,14 +1,15 @@
-require(["Player", "order!external/jquery-1.4.2.min", "order!external/jquery.jplayer-2.0.0.min"], function(Player) {
+require(["Player", "models/songs", "order!external/jquery-1.4.2.min", "order!external/jquery.jplayer-2.0.0.min"], function(Player, Songs) {
 
-    //TODO: Warning to the JPlayer error when loading before jquery
     $(document).ready(function(){
 
+        var songs = new Songs;
+
         var populatePlayList = function(data) {
-            var contentPlayList = $.map(data, function(element, index) {
+            var contentPlayList = data.map(function(element, index) {
                 var media = {};
-                media.name = element.title;
+                media.name = element.get('title');
                 media.free = true
-                media[element.songType] = "/song/" + element.id;
+                media[element.get('songType')] = "/song/" + element.get('id');
 
                 return media;
             });
@@ -29,12 +30,10 @@ require(["Player", "order!external/jquery-1.4.2.min", "order!external/jquery.jpl
             });
         }
 
-        $.ajax({
-          url: "/songs",
-          dataType: "json",
-          success: function(data) {
-            populatePlayList(data);
-          }
+        songs.fetch({
+            success: function(){
+                populatePlayList(songs);
+            }
         });
 
         $("#state").click(function() {
