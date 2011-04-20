@@ -1,11 +1,11 @@
 # Application dependencies
 
-self: soundective -> soundective-client 0.0.1
+self: soundective -> soundective-client 0.0.2
 
 require:
     - play 1.2
     - play -> scala 0.9
-    - soundective -> soundective-core 0.0.1
+    - soundective -> soundective-core 0.0.2
 
 repositories:
      - playLocal:

@@ -1,6 +1,6 @@
 # Module dependencies
 
-self: soundective -> soundective-core 0.0.1
+self: soundective -> soundective-core 0.0.2
 
 require:
     - play 1.2
