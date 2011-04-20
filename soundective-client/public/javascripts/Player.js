@@ -1,4 +1,4 @@
-require.def("Player", ["external/jquery-1.4.2.min", "external/jquery.jplayer-2.0.0.min"], function() {
+require.def("Player", ["models/song", "order!external/jquery-1.4.2.min", "order!external/jquery.jplayer-2.0.0.min"], function(Song) {
 
     var Playlist = function(instance, playlist, options) {
         var self = this;

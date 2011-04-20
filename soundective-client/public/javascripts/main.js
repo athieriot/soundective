@@ -1,4 +1,4 @@
-require(["Player", "external/jquery-1.4.2.min", "external/jquery.jplayer-2.0.0.min"], function(Player) {
+require(["Player", "order!external/jquery-1.4.2.min", "order!external/jquery.jplayer-2.0.0.min"], function(Player) {
 
     //TODO: Warning to the JPlayer error when loading before jquery
     $(document).ready(function(){
