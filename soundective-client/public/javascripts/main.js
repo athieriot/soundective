@@ -1,8 +1,8 @@
-require(["Player",
-         "views/playerView",
+require(["views/playerView",
          "models/songs",
          "order!external/jquery-1.4.2.min",
-         "order!external/jquery.jplayer-2.0.0.min"], function(Player, PlayerView, Songs) {
+         "order!external/projekktor-0.8.20.min",
+         "order!external/speakker.min"], function(PlayerView, Songs) {
 
     $(document).ready(function(){
 
@@ -11,30 +11,25 @@ require(["Player",
         var playerView = new PlayerView({model: songs});
 
         var populatePlayList = function(data) {
-            var contentPlayList = data.map(function(element, index) {
-                var media = {};
-                media.name = element.get('title');
-                media.free = true
-                media[element.get('songType')] = "/song/" + element.get('id');
-
-                return media;
+           var newPlayList = data.map(function(element, index) {
+                return media = {
+                    0: {
+                        src: '/song/' + element.get('id') + '.' + element.get('songType'),
+                    },
+                    config : {
+                        title: element.get('title'),
+                    }
+                };
             });
 
-            var audioPlaylist = new Player.PlayList("1", contentPlayList, {
-                ready: function() {
-                    audioPlaylist.displayPlaylist();
-                    audioPlaylist.playlistInit(false); // Parameter is a boolean for autoplay.
-                },
-                ended: function() {
-                    audioPlaylist.playlistNext();
-                },
-                play: function() {
-                    $(this).jPlayer("pauseOthers");
-                },
-                swfPath: "/public/javascripts/external/jplayer/flash",
-                supplied: "mp3"
+            $('.speakkerSmall').speakker({
+                file: newPlayList,
+                playlist: true,
+                theme: 'light',
+                playerFlashMP4: '/public/javascripts/external/swf/jarisplayer.swf',
+                playerFlashMP3: '/public/javascripts/external/swf/jarisplayer.swf'
             });
-        }
+        };
 
         songs.fetch({
             success: function(){

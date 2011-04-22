@@ -4,7 +4,7 @@
 
 # Home page
 GET     /                                       PlayerController.index
-GET     /song/{id}                              SongsController.binarySong
+GET     /song/{id}.{songType}                   SongsController.binarySong
 GET     /songs                                  SongsController.list
 GET     /finderState                            SongFinderController.finderState
 
