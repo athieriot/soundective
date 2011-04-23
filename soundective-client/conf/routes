@@ -5,6 +5,7 @@
 # Home page
 GET     /                                       PlayerController.index
 GET     /song/{id}.{songType}                   SongsController.binarySong
+GET     /songs/album-image/{UUID}               SongsController.albumImage
 GET     /songs                                  SongsController.list
 GET     /finderState                            SongFinderController.finderState
 

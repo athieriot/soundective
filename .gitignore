@@ -12,3 +12,4 @@ lib/
 test-result/
 modules/
 .DS_Store
+data/

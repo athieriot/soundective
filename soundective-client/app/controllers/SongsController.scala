@@ -2,9 +2,10 @@ package controllers
 
 import play.mvc._
 import models.Song
-import play.Logger
 import results.{RenderBinary, NotFound, RenderJson}
 import play.modules.soundective.core.utils.serializer.ScalaGsonSerializer
+import java.io.File
+import play.Play.applicationPath;
 
 object SongsController extends Controller {
 
@@ -16,9 +17,14 @@ object SongsController extends Controller {
     }
   }
 
+  def albumImage(UUID: String) = {
+    var image: File = new File(applicationPath + "/data/attachments/" + UUID)
+    if(image.isFile) image else NotFound
+  }
+
   def list = {
     //TODO: We don't have to log this each time in info...
-    Logger.info("Your are in the SongsController and there are " + Song.count.toString + " songs in the database")
+    //Logger.info("Your are in the SongsController and there are " + Song.count.toString + " songs in the database")
 
     songJson(Song.findAll)
   }

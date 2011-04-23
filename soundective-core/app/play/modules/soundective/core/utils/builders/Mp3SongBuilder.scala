@@ -1,11 +1,12 @@
 package play.modules.soundective.core.utils.builders
 
 import models.Song
-import java.io.File
 import play.Logger
 import com.mpatric.mp3agic.Mp3File
 import play.modules.soundective.core.utils.SongTypes
 import play.modules.soundective.core.utils.SongTypes.SongType
+import play.db.jpa.Blob
+import java.io.{ByteArrayInputStream, File}
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,16 +25,51 @@ class Mp3SongBuilder extends SongBuilder {
       return null
     }
 
+    var absolutePath = file.getAbsolutePath
+    var title = file.getName
+
+    Logger.info("Starting build song : " + file.getName)
+
+
     try {
       val mp3file = new Mp3File(file.getAbsolutePath)
+      val tag = mp3file.getId3v2Tag
 
-      Logger.info("Starting build song : " + mp3file.getId3v2Tag.getTitle)
+      var albumImage = new Blob();
+      albumImage.set(new ByteArrayInputStream(tag.getAlbumImage), tag.getAlbumImageMimeType)
 
-      new Song(mp3file.getId3v2Tag.getTitle, 0, file.getAbsolutePath, songType.mime, songType.name)
+      new Song(songType.mime,
+               songType.name,
+               file.getAbsolutePath,
+               tag.getAlbum,
+               tag.getArtist,
+               albumImage,
+               tag.getAlbumImageMimeType,
+               tag.getComment,
+               tag.getComposer,
+               tag.getCopyright,
+               tag.getEncoder,
+               tag.getGenre,
+               tag.getGenreDescription,
+               tag.getItunesComment,
+               tag.getLength,
+               tag.getObseleteFormat,
+               tag.getOriginalArtist,
+               tag.getPadding,
+               tag.getTitle,
+               tag.getTrack,
+               tag.getUrl,
+               tag.getVersion,
+               tag.getYear)
 
     } catch {
-      //TODO: FIXME: Do this better. For example, creating the song with file.name = name
-      case e: Exception => return new Song(file.getName, 0, file.getAbsolutePath, songType.mime, songType.name)
+      //TODO: FIXME: Do this better. For example, create a SongTemplate to feed in builders
+      case e: Exception => return new Song(songType.mime,
+                                           songType.name,
+                                           file.getAbsolutePath,
+                                           null, null, null, null, null, null, null, null, 0,
+                                           null, null, 0, false, null, false, file.getName,
+                                           null, null, null, null)
     }
   }
 }

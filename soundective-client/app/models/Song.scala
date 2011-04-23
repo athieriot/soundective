@@ -7,16 +7,53 @@ import java.io.File
 @Entity
 class Song (
 
-  var title: String,
+  var mimeType: String,
 
-  var number: Long,
+  var songType: String,
 
   //TODO: Path should not appear in json response
   var path: String,
 
-  var mimeType: String,
+  var album: String,
 
-  var songType: String
+  var artist: String,
+
+  //TODO: Testing this
+  var albumImage: Blob,
+
+  var albumImageMimeType: String,
+
+  var comment: String,
+
+  var composer: String,
+
+  var copyright: String,
+
+  var encoder: String,
+
+  var genre: Long,
+
+  var genreDescription: String,
+
+  var iTunesComment: String,
+
+  var length: Long,
+
+  var obseleteFormat: Boolean,
+
+  var originalArtist: String,
+
+  var padding: Boolean,
+
+  var title: String,
+
+  var track: String,
+
+  var url: String,
+
+  var version: String,
+
+  var year: String
 
 ) extends Model {
     //instance methods

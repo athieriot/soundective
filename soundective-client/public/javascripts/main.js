@@ -18,6 +18,7 @@ require(["views/playerView",
                     },
                     config : {
                         title: element.get('title'),
+                        poster: '/songs/album-image/' + element.get('albumImage').UUID
                     }
                 };
             });
