@@ -13,6 +13,12 @@ import org.junit._
 
 class SongFinderControllerTest extends FunctionalTest with Browser with Matchers {
 
+  @Before
+  def setUp {
+    Fixtures.deleteAllModels
+    Fixtures.loadModels("songs/fixtures/songs.yml")
+  }
+
   @Test
   def songFinderTest {
     val response = GET("/finderState")
@@ -22,11 +28,11 @@ class SongFinderControllerTest extends FunctionalTest with Browser with Matchers
     response contentShouldBe("{files: 9, songs: 6}")
   }
 
-  /* TODO: A test for when we'll be able to control finding
   def songFinderNoContent {
-    //Stop the finding service
+    Fixtures.deleteAllModels
+
     val response = GET("/finderState")
     response statusShouldBe(204)
   }
-  */
+
 }

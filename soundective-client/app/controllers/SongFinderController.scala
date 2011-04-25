@@ -1,7 +1,7 @@
 package controllers
 
 import play.mvc.Controller
-import services.SongFinderFactory
+import services.SongFinderService
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,8 +12,8 @@ import services.SongFinderFactory
 object SongFinderController extends Controller {
 
   def finderState = {
-    if(SongFinderFactory.getSongFinderDetails != null) {
-      Json("{files: " + SongFinderFactory.getSongFinderDetails._1 + ", songs: " + SongFinderFactory.getSongFinderDetails._2 + "}")
+    if(SongFinderService.getSongFinderDetails != null) {
+      Json("{files: " + SongFinderService.getSongFinderDetails._1 + ", songs: " + SongFinderService.getSongFinderDetails._2 + "}")
     } else {
       NoContent
     }

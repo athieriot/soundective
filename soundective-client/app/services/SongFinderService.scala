@@ -16,14 +16,13 @@ import play.db.jpa.{JPA, JPAPlugin, Transactional}
  * Time: 20:32
  */
 
-//TODO: This is more like a service
-object SongFinderFactory {
+//TODO: Adapt to connect to other services. Question: Responsibilty to server or client?
+object SongFinderService {
 
   private var globalSongFinder: SongFinder = null
   private val songDirectory = configuration.getProperty("soundective.song.directory")
 
   //TODO: Need stop the process to relaunch
-
   def getSongFinder: SongFinder = {
     if(globalSongFinder == null) {
 
@@ -41,7 +40,6 @@ object SongFinderFactory {
   }
 
   //TODO: Add a test for that
-  //@Transactional(readOnly=true)
   def addSong(file: File) {
     JPAPlugin.startTx(false);
 

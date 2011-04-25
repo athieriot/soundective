@@ -1,8 +1,19 @@
 # Test songs
 
 Song(something):
-    title:  "Something"
-    number: "1"
-    path:   "test/songs/02 - Something.mp3"
+    path: "test/songs/02 - Something.mp3"
     mimeType: "audio/mpeg"
     songType: "mp3"
+    album: "Abbey Road"
+    artist: "The Beatles"
+    albumImage: ""
+    albumImageMimeType: "image/jpeg"
+    composer: "George Harrison"
+    genre: -1
+    genreDescription: "Pop/Rock"
+    length: 39946
+    obseleteFormat: false
+    padding: false
+    title: "Something"
+    track: "2/17"
+    version: "4.0"

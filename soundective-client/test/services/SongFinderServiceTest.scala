@@ -12,27 +12,27 @@ import play.modules.soundective.core.utils.songFinders.SongFinder
  * Time: 21:54
  */
 
-class SongFinderFactoryTest extends UnitTest {
+class SongFinderServiceTest extends UnitTest {
 
   private val time_pause = 50
 
   //TODO: Reactive this test when stopping will be possible
   /*@Test
   def getSongFingerDetailsNullTest {
-    assertNull(SongFinderFactory.getSongFinderDetails)
+    assertNull(SongFinderService.getSongFinderDetails)
   }*/
 
   @Test
   def getSongFinderTest {
-    assertTrue(SongFinderFactory.getSongFinder.isInstanceOf[SongFinder])
+    assertTrue(SongFinderService.getSongFinder.isInstanceOf[SongFinder])
   }
 
   @Test
   def getSongFingerDetailsTest {
-    SongFinderFactory.getSongFinder.start
+    SongFinderService.getSongFinder.start
     pause(time_pause)
 
-    assertNotNull(SongFinderFactory.getSongFinderDetails)
-    assertTrue(SongFinderFactory.getSongFinderDetails.isInstanceOf[Tuple2[Long, Long]])
+    assertNotNull(SongFinderService.getSongFinderDetails)
+    assertTrue(SongFinderService.getSongFinderDetails.isInstanceOf[Tuple2[Long, Long]])
   }
 }

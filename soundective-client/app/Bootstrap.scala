@@ -1,6 +1,7 @@
 import play.jobs._
 import play.Logger
-import services.SongFinderFactory
+import play.modules.soundective.core.utils.songFinders.SongFinder
+import services.SongFinderService
 
 /**
  * Created by IntelliJ IDEA.
@@ -9,16 +10,22 @@ import services.SongFinderFactory
  * Time: 22:20
  */
 
+@Every("2h")
 @OnApplicationStart
-//TODO: Program OnEvery sometimes?
 class Bootstrap extends Job {
+
+  var songFinderService = SongFinderService.getSongFinder
 
   @Override
   override def doJob() {
     Logger.info("Hello ! I'm the bootstrap and i'm ready to populate database")
 
-    if(SongFinderFactory.getSongFinder != null) {
-      SongFinderFactory.getSongFinder.start
+    doPopulate(songFinderService)
+  }
+
+  def doPopulate(songFinderService: SongFinder) {
+    if(songFinderService != null) {
+      songFinderService.start
     }
   }
 }

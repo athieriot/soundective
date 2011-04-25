@@ -31,6 +31,7 @@ class Mp3SongBuilderTest extends UnitTest {
     assertNotNull(song)
     assertEquals("Something", song.title)
     assertEquals(new File(testPath).getAbsolutePath, song.path)
+    assertTrue(song.albumImage.getFile.isFile);
   }
 
   @Test

@@ -21,6 +21,7 @@ class Mp3SongBuilder extends SongBuilder {
 
   def buildASong(file: File): Song = {
 
+    //TODO: What about monads !!
     if(file == null || !file.exists || file.length == 0) {
       return null
     }
@@ -38,6 +39,7 @@ class Mp3SongBuilder extends SongBuilder {
       var albumImage = new Blob();
       albumImage.set(new ByteArrayInputStream(tag.getAlbumImage), tag.getAlbumImageMimeType)
 
+      //TODO: Yerk.
       new Song(songType.mime,
                songType.name,
                file.getAbsolutePath,
