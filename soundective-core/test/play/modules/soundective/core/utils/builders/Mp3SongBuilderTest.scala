@@ -18,11 +18,13 @@ class Mp3SongBuilderTest extends UnitTest {
 
   var mp3builder: Mp3SongBuilder = null
   var testPath: String = null
+  var badTestPath: String = null
 
   @Before
   def setup {
     mp3builder = new Mp3SongBuilder
     testPath = configuration.getProperty("soundective.song.directory") + "/02 - Something.mp3"
+    badTestPath = configuration.getProperty("soundective.song.directory") + "/06 - Mr. Tambourine Man.mp3"
   }
 
   @Test
@@ -31,7 +33,13 @@ class Mp3SongBuilderTest extends UnitTest {
     assertNotNull(song)
     assertEquals("Something", song.title)
     assertEquals(new File(testPath).getAbsolutePath, song.path)
-    assertTrue(song.albumImage.getFile.isFile);
+    assertTrue(song.albumImage.getFile.isFile)
+  }
+
+  @Test
+  def buildABadSongTest {
+    val song: Song = mp3builder.buildASong(new File(badTestPath))
+    assertNull(song)
   }
 
   @Test

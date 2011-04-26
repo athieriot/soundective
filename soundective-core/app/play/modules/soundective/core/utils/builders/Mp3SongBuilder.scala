@@ -36,6 +36,7 @@ class Mp3SongBuilder extends SongBuilder {
       val mp3file = new Mp3File(file.getAbsolutePath)
       val tag = mp3file.getId3v2Tag
 
+      //TODO: Have to clean store directory sometimes (Or on delete)
       var albumImage = new Blob();
       albumImage.set(new ByteArrayInputStream(tag.getAlbumImage), tag.getAlbumImageMimeType)
 

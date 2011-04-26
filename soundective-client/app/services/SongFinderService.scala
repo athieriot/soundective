@@ -7,7 +7,7 @@ import play.modules.soundective.core.utils.builders.{SongBuilderFactory, SongBui
 import play.modules.soundective.core.utils.SongTypes
 import models.Song
 import play.Play.configuration
-import play.db.jpa.{JPA, JPAPlugin, Transactional}
+import play.db.jpa.{JPA, JPAPlugin}
 import actors.Actor
 
 /**
@@ -34,16 +34,15 @@ object SongFinderService {
     return globalSongFinder
   }
 
-  //TODO: We can get the state of the actor
   def getSongFinderDetails: Tuple3[Actor.State.Value, Long, Long] = {
     if(globalSongFinder == null) return null
     else return globalSongFinder.getDetails
   }
 
-  //TODO: Add a test for that
   def addSong(file: File) {
     JPAPlugin.startTx(false);
 
+    //TODO: Do not have mp3 here
     var songBuilder: SongBuilder = SongBuilderFactory.getSongBuilder(SongTypes.mp3)
     var song:Song = songBuilder.buildASong(file)
 
