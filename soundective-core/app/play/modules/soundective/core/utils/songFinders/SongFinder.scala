@@ -41,7 +41,7 @@ class SongFinder(directory: File, action: Function[File, Unit]) extends Actor {
     }
   }
 
-  def getDetails: Tuple2[Long, Long] = {
-    Tuple2(fileCounter, songCounter)
+  def getDetails: Tuple3[Actor.State.Value, Long, Long] = {
+    Tuple3(this.getState, fileCounter, songCounter)
   }
 }

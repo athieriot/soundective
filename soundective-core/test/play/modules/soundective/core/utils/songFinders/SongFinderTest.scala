@@ -27,8 +27,9 @@ class SongFinderTest extends UnitTest {
 
     var result = songFinderTest.getDetails
     assertNotNull(result)
-    assertTrue(result._1 > 0)
+    assertNotSame("New", result._1.toString)
     assertTrue(result._2 > 0)
+    assertTrue(result._3 > 0)
   }
 
   @Test

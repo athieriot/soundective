@@ -8,6 +8,7 @@ import play.modules.soundective.core.utils.SongTypes
 import models.Song
 import play.Play.configuration
 import play.db.jpa.{JPA, JPAPlugin, Transactional}
+import actors.Actor
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,7 +35,7 @@ object SongFinderService {
   }
 
   //TODO: We can get the state of the actor
-  def getSongFinderDetails: Tuple2[Long, Long] = {
+  def getSongFinderDetails: Tuple3[Actor.State.Value, Long, Long] = {
     if(globalSongFinder == null) return null
     else return globalSongFinder.getDetails
   }

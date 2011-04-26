@@ -4,6 +4,7 @@ import org.junit._
 import org.junit.Assert._
 import play.test._
 import play.modules.soundective.core.utils.songFinders.SongFinder
+import actors.Actor
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,6 +34,6 @@ class SongFinderServiceTest extends UnitTest {
     pause(time_pause)
 
     assertNotNull(SongFinderService.getSongFinderDetails)
-    assertTrue(SongFinderService.getSongFinderDetails.isInstanceOf[Tuple2[Long, Long]])
+    assertTrue(SongFinderService.getSongFinderDetails.isInstanceOf[Tuple3[Actor.State.Value, Long, Long]])
   }
 }

@@ -13,7 +13,9 @@ object SongFinderController extends Controller {
 
   def finderState = {
     if(SongFinderService.getSongFinderDetails != null) {
-      Json("{files: " + SongFinderService.getSongFinderDetails._1 + ", songs: " + SongFinderService.getSongFinderDetails._2 + "}")
+      Json("{state:" + SongFinderService.getSongFinderDetails._1.toString +
+           ", files: " + SongFinderService.getSongFinderDetails._2 +
+           ", songs: " + SongFinderService.getSongFinderDetails._3 + "}")
     } else {
       NoContent
     }
