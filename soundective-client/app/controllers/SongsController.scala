@@ -3,12 +3,11 @@ package controllers
 import play.mvc._
 import models.Song
 import results.{RenderBinary, NotFound, RenderJson}
-import play.modules.soundective.core.utils.serializer.ScalaGsonSerializer
+import play.modules.soundective.core.utils.serializers.ScalaGsonSerializer
 import java.io.File
 import play.Play.applicationPath
 import play.Logger
 import play.db.jpa.Blob
-;
 
 object SongsController extends Controller {
 
@@ -20,6 +19,7 @@ object SongsController extends Controller {
     }
   }
 
+  //TODO: Use Blog.get?
   def albumImage(UUID: String) = {
     if (UUID == null) NotFound
 
@@ -30,11 +30,6 @@ object SongsController extends Controller {
   def list = {
     Logger.debug("Your are in the SongsController and there are " + Song.count.toString + " songs in the database")
 
-    songJson(Song.findAll)
-  }
-
-  private def songJson(list: List[Song]) = {
-    //FIXME: Until play version of Json work again
-    new RenderJson(ScalaGsonSerializer.toJson(list))
+    new RenderJson(new ScalaGsonSerializer().exclude("path").toJson(Song.findAll))
   }
 }

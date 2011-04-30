@@ -11,14 +11,12 @@ class Song (
 
   var songType: String,
 
-  //TODO: Path should not appear in json response
   var path: String,
 
   var album: String,
 
   var artist: String,
 
-  //TODO: Testing this
   var albumImage: Blob,
 
   var albumImageMimeType: String,
