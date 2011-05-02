@@ -4,7 +4,9 @@ import models.Song
 import play.test._
 import org.junit._
 import play.db.jpa.Blob
-import java.io.File
+import com.mpatric.mp3agic.Mp3File
+import java.io.{File, ByteArrayInputStream}
+import play.Play.configuration
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,23 +18,24 @@ import java.io.File
 class SongsControllerTest extends FunctionalTest with Browser with Matchers {
 
   private val title = "Something"
-  private var songToTest: Song = null;
-  private var uuidTest: String = null;
+  private var fileToTest: String = configuration.getProperty("soundective.song.directory") + "/02 - Something.mp3"
+  private var blobToTest: Blob = new Blob
+  private var songToTest: Song = null
+  private var uuidTest: String = null
 
   @Before
   def setUp {
     Fixtures.deleteAllModels
     Fixtures.loadModels("songs/fixtures/songs.yml")
 
-    songToTest = Song.findByTitle(title).head
-    uuidTest = "2fe5fff0-1325-4160-bb9c-80e4670f6de6"
+    blobToTest.set(new ByteArrayInputStream(new Mp3File(fileToTest).getId3v2Tag.getAlbumImage), "image/jpeg")
 
-    new File(Blob.getStore(), uuidTest).createNewFile()
+    songToTest = Song.findByTitle(title).head
   }
 
   @Test
   def songsTest {
-    //One songs in test : Something
+    //One song in tests : Something
 
     val response = GET("/songs")
     response shouldBeOk()
@@ -42,7 +45,6 @@ class SongsControllerTest extends FunctionalTest with Browser with Matchers {
                             "\"songType\":\"" + songToTest.songType + "\"," +
                             "\"album\":\"" + songToTest.album + "\"," +
                             "\"artist\":\"" + songToTest.artist + "\"," +
-                            "\"albumImage\":{}," +
                             "\"albumImageMimeType\":\"" + songToTest.albumImageMimeType + "\"," +
                             "\"composer\":\"" + songToTest.composer + "\"," +
                             "\"genre\":" + songToTest.genre + "," +
@@ -58,13 +60,19 @@ class SongsControllerTest extends FunctionalTest with Browser with Matchers {
 
   @Test
   def songAlbumImageTest {
-    val response = GET("/songs/album-image/" + uuidTest)
+    songToTest.albumImage = blobToTest
+    songToTest.save
+
+    val response = GET("/song/" + songToTest.id +"/album-image")
     response shouldBeOk
   }
 
   @Test
   def songAlbumImageNotFoundTest {
-    val response = GET("/songs/album-image/notexistingfile")
+    songToTest.albumImage = null
+    songToTest.save
+
+    val response = GET("/song/" + songToTest.id +"/album-image")
     response shouldNotBeFound
   }
 
@@ -73,5 +81,11 @@ class SongsControllerTest extends FunctionalTest with Browser with Matchers {
     val response = GET("/song/" + songToTest.id + "." + songToTest.mimeType)
     response shouldBeOk()
     response contentTypeShouldBe(songToTest.mimeType)
+  }
+
+  @Test
+  def songNotFoundTest {
+    val response = GET("/song/9999")
+    response shouldNotBeFound
   }
 }

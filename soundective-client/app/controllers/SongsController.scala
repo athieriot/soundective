@@ -9,6 +9,13 @@ import play.Play.applicationPath
 import play.Logger
 import play.db.jpa.Blob
 
+/**
+ * Created by IntelliJ IDEA.
+ * User: aurelien
+ * Date: 13/03/11
+ * Time: 17:41
+ */
+
 object SongsController extends Controller {
 
   def binarySong(id: Long) = Song.findById(id) match {
@@ -19,17 +26,21 @@ object SongsController extends Controller {
     }
   }
 
-  //TODO: Use Blog.get?
-  def albumImage(UUID: String) = {
-    if (UUID == null) NotFound
-
-    var image: File = new File(Blob.getStore(), UUID)
-    if(image.isFile) image else NotFound
+  def albumImage(id: Long) = Song.findById(id) match {
+    case None => NotFound
+    case x => {
+      if(x.head.albumImage.exists) {
+        var image: File = x.head.albumImage.getFile
+        if(image.isFile) image else NotFound
+      } else {
+        NotFound
+      }
+    }
   }
 
   def list = {
     Logger.debug("Your are in the SongsController and there are " + Song.count.toString + " songs in the database")
 
-    new RenderJson(new ScalaGsonSerializer().exclude("path").toJson(Song.findAll))
+    new RenderJson(new ScalaGsonSerializer().exclude("path, albumImage").toJson(Song.findAll))
   }
 }

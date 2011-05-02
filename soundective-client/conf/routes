@@ -4,9 +4,15 @@
 
 # Home page
 GET     /                                       PlayerController.index
-GET     /song/{id}.{songType}                   SongsController.binarySong
-GET     /songs/album-image/{UUID}               SongsController.albumImage
+
+# Lists
 GET     /songs                                  SongsController.list
+
+# Thing
+GET     /song/{id}/album-image                  SongsController.albumImage
+GET     /song/{id}.{songType}                   SongsController.binarySong
+
+# Finders States
 GET     /finderState                            SongFinderController.finderState
 
 # Map static resources from the /app/public folder to the /public path
