@@ -22,7 +22,8 @@ Usage :
     - Install Play ! Framework
     - Extract files
     - Adapt soundective.song.directory property in conf/application.conf if you want
-    - Then type : play run --%prod --deps
+    - Download dependencies with : play --deps in core and client directories
+    - Then type : play run --%prod
     - And your application will be available at http://localhost:9000
 
 Services : 
