@@ -2,6 +2,12 @@ require.def("models/songs", ["order!external/underscore-1.1.6.min", "order!exter
 
     var Song = Backbone.Model.extend({
 
+        url: '/song',
+
+        binarySongUrl: function() {return this.url + '/' + this.get('id') + '.' + this.get('songType');},
+
+        albumImageUrl: function() {return this.url + '/' + this.get('id') + '/album-image';}
+
     });
 
     var Songs = Backbone.Collection.extend({

@@ -42,7 +42,7 @@ object SongFinderService {
   def addSong(file: File) {
     JPAPlugin.startTx(false);
 
-    //TODO: Do not have mp3 here
+    //TODO: Do not have mp3 here. Big refactoring for music types
     var songBuilder: SongBuilder = SongBuilderFactory.getSongBuilder(SongTypes.mp3)
     var song:Song = songBuilder.buildASong(file)
 

@@ -1,42 +1,21 @@
-require(["views/playerView",
+require(["views/player",
          "models/songs",
+         "models/playlist",
+         "views/songView",
          "order!external/jquery-1.4.2.min",
          "order!external/projekktor-0.8.20.min",
-         "order!external/speakker.min"], function(PlayerView, Songs) {
+         "order!external/speakker.min"], function(Player, Songs, Playlist, SongView) {
 
-    $(document).ready(function(){
+    $(document).ready(function() {
 
-        var songs = new Songs;
+        var player = new Player({model: new Playlist});
 
-        var playerView = new PlayerView({model: songs});
+        var songView = new SongView({model: new Songs});
 
-        var populatePlayList = function(data) {
-           var newPlayList = data.map(function(element, index) {
-                return media = {
-                    0: {
-                        src: '/song/' + element.get('id') + '.' + element.get('songType'),
-                    },
-                    config : {
-                        title: element.get('title'),
-                        poster: '/song/' + element.get('id') + '/album-image'
-                    }
-                };
-            });
-
-            $('.speakkerSmall').speakker({
-                file: newPlayList,
-                playlist: true,
-                theme: 'light',
-                playerFlashMP4: '/public/javascripts/external/swf/jarisplayer.swf',
-                playerFlashMP3: '/public/javascripts/external/swf/jarisplayer.swf'
-            });
-        };
-
-        songs.fetch({
-            success: function(){
-                populatePlayList(songs);
-
-                $('#songList').append(playerView.render().el);
+        songView.model.fetch({
+            success: function(data) {
+                $('#songList').append(songView.render().el);
+                player.addSongs(songView.model).render('.speakkerSmall');
             }
         });
 
