@@ -4,10 +4,15 @@ require.def("models/playlist", ["order!external/underscore-1.1.6.min", "order!ex
     });
 
     var Playlist = Backbone.Collection.extend({
+        initialize: function(arg) {
+        },
+
         model: PlaylistItem,
 
         addSong: function(song) {
-            this.add({
+            //TODO: Validate this
+            if(this.find(function(item){ return item.get('id') == song.id;}) == undefined) {
+                this.add({
                 id: song.get('id'),
                 0: {
                     src: song.binarySongUrl(),
@@ -16,7 +21,12 @@ require.def("models/playlist", ["order!external/underscore-1.1.6.min", "order!ex
                     title: song.get('title'),
                     poster: song.albumImageUrl()
                 }
-            });
+                });
+            }
+        },
+
+        addSongs: function(songs) {
+            songs.each(_.bind(this.addSong, this));
         }
     });
 

@@ -3,15 +3,12 @@ require.def("views/songView", ["order!external/jquery-1.4.2.min",
                            "order!external/backbone-0.3.3.min",
                            "order!external/ICanHaz-0.9.min"], function() {
 
-    var self = null;
 
     var SongView = Backbone.View.extend({
         initialize: function (args) {
-            self = this;
+            _.bindAll(this, 'changeTitle');
 
-            _.bindAll(self, 'changeTitle');
-
-            self.model.bind('change:title', self.changeTitle);
+            this.model.bind('change:title', this.changeTitle);
         },
 
         events: {
@@ -19,19 +16,19 @@ require.def("views/songView", ["order!external/jquery-1.4.2.min",
         },
 
         render: function () {
-            self.el = ich.songs({song: self.model.toJSON()})
+            this.el = ich.songs({song: this.model.toJSON()})
 
-            return self;
+            return this;
         },
 
 
         changeTitle: function () {
-            self.$('.title').text(self.model.get('title'));
+            this.$('.title').text(this.model.get('title'));
         },
 
 
         handleTitleClick: function () {
-            console.log('you clicked the title: ' + self.model.get('title'));
+            console.log('you clicked the title: ' + this.model.get('title'));
         }
     });
 

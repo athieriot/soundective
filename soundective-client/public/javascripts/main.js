@@ -8,14 +8,16 @@ require(["views/player",
 
     $(document).ready(function() {
 
-        var player = new Player({model: new Playlist});
+        var player = new Player({model: new Playlist}).render('.speakkerSmall');
 
         var songView = new SongView({model: new Songs});
+
 
         songView.model.fetch({
             success: function(data) {
                 $('#songList').append(songView.render().el);
-                player.addSongs(songView.model).render('.speakkerSmall');
+
+                player.model.addSongs(data);
             }
         });
 

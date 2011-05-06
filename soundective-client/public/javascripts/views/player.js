@@ -2,8 +2,7 @@ require.def("views/player", ["order!external/jquery-1.4.2.min",
                            "order!external/underscore-1.1.6.min",
                            "order!external/backbone-0.3.3.min"], function() {
 
-
-    var self = null;
+    var ids = new Array();
 
     var Player = Backbone.View.extend({
 
@@ -11,41 +10,35 @@ require.def("views/player", ["order!external/jquery-1.4.2.min",
         flashPath: '/public/javascripts/external/swf/jarisplayer.swf',
 
         initialize: function (args) {
-            self = this;
-        },
+            this.id = ids.length + 1;
+            ids.push(this.id);
 
-        events: {
+            _.bindAll(this, "addItem");
+
+            this.model.bind('add', this.addItem);
         },
 
         render: function (domElement) {
             //Speakker initialization
-            self.instance = $(domElement).speakker({
-                file: self.model.toJSON(),
+            $(domElement).speakker({
+                identifier: this.id,
+                file: (this.model.length == 0 ? null : this.model.toJSON()),
                 playlist: true,
-                theme: self.playerTheme,
-                playerFlashMP4: self.flashPath,
-                playerFlashMP3: self.flashPath
+                theme: this.playerTheme,
+                playerFlashMP4: this.flashPath,
+                playerFlashMP3: this.flashPath
             });
 
-            return self;
+            this.instance = projekktor(this.id - 1);
+
+            return this;
         },
 
-        addSong: function(song) {
-            //TODO: Verification of existence
-            self.model.addSong(song);
-            return self;
-        },
+        addItem: function(item) {
+            this.instance && this.instance.setItem(item.toJSON(), null).setActiveItem('poster');
 
-        addSongs: function(songs) {
-            songs.forEach(function(song) {self.addSong(song);});
-            return self;
+            return this;
         },
-
-        changeTitle: function () {
-        },
-
-        handleTitleClick: function () {
-        }
     });
 
     return Player;
