@@ -1,6 +1,8 @@
 require.def("views/player", ["order!external/jquery-1.4.2.min",
                            "order!external/underscore-1.1.6.min",
-                           "order!external/backbone-0.3.3.min"], function() {
+                           "order!external/backbone-0.3.3.min",
+                           "order!external/projekktor-0.8.20.min",
+                           "order!external/speakker.min"], function() {
 
     var ids = new Array();
 
@@ -13,7 +15,7 @@ require.def("views/player", ["order!external/jquery-1.4.2.min",
             this.id = ids.length + 1;
             ids.push(this.id);
 
-            _.bindAll(this, "addItem");
+            _.bindAll(this, 'addItem', 'play');
 
             this.model.bind('add', this.addItem);
         },
@@ -39,6 +41,12 @@ require.def("views/player", ["order!external/jquery-1.4.2.min",
 
             return this;
         },
+
+        play: function() {
+            this.instance && this.instance.setPlay();
+
+            return this;
+        }
     });
 
     return Player;

@@ -120,6 +120,10 @@ h2, h3{
 	float:left;
 }
 
+#state {
+    float: left;
+}
+
 h2{
 	font-size: 55px;
 }

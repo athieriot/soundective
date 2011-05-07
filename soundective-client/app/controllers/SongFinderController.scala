@@ -2,6 +2,7 @@ package controllers
 
 import play.mvc.Controller
 import services.SongFinderService
+import com.google.gson.JsonParser
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,9 +14,10 @@ object SongFinderController extends Controller {
 
   def finderState = {
     if(SongFinderService.getSongFinderDetails != null) {
-      Json("{state:" + SongFinderService.getSongFinderDetails._1.toString +
-           ", files: " + SongFinderService.getSongFinderDetails._2 +
-           ", songs: " + SongFinderService.getSongFinderDetails._3 + "}")
+      response.contentType = "application/json; charset=utf-8"
+      new JsonParser().parse("{'state':'" + SongFinderService.getSongFinderDetails._1.toString +
+           "', 'files': '" + SongFinderService.getSongFinderDetails._2 +
+           "', 'songs': '" + SongFinderService.getSongFinderDetails._3 + "'}")
     } else {
       NoContent
     }

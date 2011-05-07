@@ -4,10 +4,16 @@
 <script id="songs" type="text/html">
     {{#song}}
     <li id="song-{{ id }}">
-        <span class="title">{{ title }}</span>
+        <a class="title">{{ title }}</a>
         <span>({{ songType }})</span>
     </li>
     {{/song}}
+</script>
+
+<script id="finderState" type="text/html">
+        Recherche de fichier : <span>{{ state }}</span>
+         - Analys&eacute;s : <span>{{ files }}</span>
+         - Trouv&eacute;s : <span>{{ songs }}</span>
 </script>
 
 <div id="header-container">
@@ -24,6 +30,7 @@
 <div id="main" class="wrapper">
     <aside>
         <h3>Something aside</h3>
+        <div id="state"></div>
         <div><ul id="songList"></ul></div>
     </aside>
     <article>
@@ -43,8 +50,6 @@
 
     </article>
 </div>
-<input id="state" type="button" value="State" />
-
 
 <div id="footer-container">
     <footer class="wrapper">

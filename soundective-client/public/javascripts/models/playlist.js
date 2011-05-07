@@ -10,17 +10,16 @@ require.def("models/playlist", ["order!external/underscore-1.1.6.min", "order!ex
         model: PlaylistItem,
 
         addSong: function(song) {
-            //TODO: Validate this
-            if(this.find(function(item){ return item.get('id') == song.id;}) == undefined) {
+            if(this.get(song.get('id')) == undefined) {
                 this.add({
-                id: song.get('id'),
-                0: {
-                    src: song.binarySongUrl(),
-                },
-                config: {
-                    title: song.get('title'),
-                    poster: song.albumImageUrl()
-                }
+                    id: song.get('id'),
+                    0: {
+                        src: song.binarySongUrl(),
+                    },
+                    config: {
+                        title: song.get('title'),
+                        poster: song.albumImageUrl()
+                    }
                 });
             }
         },

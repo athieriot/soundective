@@ -1,35 +1,12 @@
-require(["views/player",
-         "models/songs",
-         "models/playlist",
-         "views/songView",
+require(["controllers/playerController",
          "order!external/jquery-1.4.2.min",
-         "order!external/projekktor-0.8.20.min",
-         "order!external/speakker.min"], function(Player, Songs, Playlist, SongView) {
+         "order!external/underscore-1.1.6.min",
+         "order!external/backbone-0.3.3.min"], function(PlayerController) {
 
     $(document).ready(function() {
 
-        var player = new Player({model: new Playlist}).render('.speakkerSmall');
+        new PlayerController;
 
-        var songView = new SongView({model: new Songs});
-
-
-        songView.model.fetch({
-            success: function(data) {
-                $('#songList').append(songView.render().el);
-
-                player.model.addSongs(data);
-            }
-        });
-
-        $("#state").click(function() {
-            $.ajax({
-              url: "/finderState",
-              dataType: "json",
-              success: function(data) {
-                alert(data.files + " " + data.songs);
-              }
-            });
-        });
-
+        Backbone.history.start();
     })
 });
