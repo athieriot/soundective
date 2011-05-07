@@ -1,4 +1,4 @@
 #!/bin/sh
 # -*- coding: UTF8 -*-
 
-play run --%PROD --deps
+play run --%prod --deps
