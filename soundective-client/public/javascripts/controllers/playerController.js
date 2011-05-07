@@ -8,11 +8,14 @@ require.def("controllers/playerController", ["views/player",
                            "order!external/backbone-0.3.3.min"], function(Player, Songs, Playlist, SongView, FinderStateView) {
 
     var PlayerController = Backbone.Controller.extend({
-        pollingDelay: 10000,
+        standardPollingDelay: 10000,    //10s
+        maxPollingDelay: 720000,        //2h
 
         initialize: function(args) {
 
-            _.bindAll(this, 'play', 'finderStatePolling');
+            _.bindAll(this, 'play', 'finderStatePolling', 'poll');
+
+            this.bind('poll', this.finderStatePolling);
 
             this.player = new Player({model: new Playlist}).render('.speakkerSmall');
             this.songView = new SongView({model: new Songs});
@@ -26,23 +29,32 @@ require.def("controllers/playerController", ["views/player",
                 }, this)
             });
 
-            setInterval(this.finderStatePolling, this.pollingDelay);
+            this.interval = setInterval(this.poll, this.standardPollingDelay);
+        },
+
+        routes: {
+            "play": "play", // #play
+            "poll": "poll"  // #poll
         },
 
         finderStatePolling: function() {
             this.finderStateView.model.fetch({
                 success: _.bind(function(data) {
                     $('#state').html(this.finderStateView.render().el);
+
+                    //TODO: Adapt with long polling?
+                    if(this.finderStateView.model.get('status') == 'Terminated')
+                        clearInterval(this.interval);
+                        this.interval = setInterval(this.poll, this.maxPollingDelay);
                 }, this)
             });
         },
 
-        routes: {
-            "play": "play", // #play
-        },
-
         play: function() {
             this.player.play();
+        },
+        poll: function() {
+            this.trigger('poll');
         }
     });
 

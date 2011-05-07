@@ -1,6 +1,7 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
+<!-- TODO: Better solution to put templates here ? Or anywhere else ? -->
 <script id="songs" type="text/html">
     {{#song}}
     <li id="song-{{ id }}">
@@ -11,10 +12,12 @@
 </script>
 
 <script id="finderState" type="text/html">
-        Recherche de fichier : <span>{{ state }}</span>
+        Recherche de fichier : <span>{{ status }}</span>
          - Analys&eacute;s : <span>{{ files }}</span>
          - Trouv&eacute;s : <span>{{ songs }}</span>
 </script>
+<!-- TODO: Full mustache templating? :) -->
+
 
 <div id="header-container">
     <header class="wrapper">

@@ -25,7 +25,7 @@ class SongFinderControllerTest extends FunctionalTest with Browser with Matchers
     response shouldBeOk()
     response contentTypeShouldBe("application/json")
     response charsetShouldBe("utf-8")
-    response contentShouldBe("{\"state\":\"Terminated\"," +
+    response contentShouldBe("{\"status\":\"Terminated\"," +
                               "\"files\":\"9\"," +
                               "\"songs\":\"6\"}")
   }

@@ -15,7 +15,7 @@ object SongFinderController extends Controller {
   def finderState = {
     if(SongFinderService.getSongFinderDetails != null) {
       response.contentType = "application/json; charset=utf-8"
-      new JsonParser().parse("{'state':'" + SongFinderService.getSongFinderDetails._1.toString +
+      new JsonParser().parse("{'status':'" + SongFinderService.getSongFinderDetails._1.toString +
            "', 'files': '" + SongFinderService.getSongFinderDetails._2 +
            "', 'songs': '" + SongFinderService.getSongFinderDetails._3 + "'}")
     } else {
