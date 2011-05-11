@@ -12,13 +12,13 @@ import services.SongFinderService
 
 @Every("2h")
 @OnApplicationStart
-class Bootstrap extends Job {
+class ClientBootstrap extends Job {
 
   var songFinderService = SongFinderService.getSongFinder
 
   @Override
   override def doJob() {
-    Logger.info("Hello ! I'm the bootstrap and i'm ready to populate database")
+    Logger.debug("Hello ! I'm the bootstrap and i'm ready to populate database")
 
     doPopulate(songFinderService)
   }

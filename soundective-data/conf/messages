@@ -1,0 +1,5 @@
+# Default soundective-data messages
+# You can specialize this file for each language.
+# For exemple, for french create a messages.fr file
+
+#soundective-data.name=soundective-data

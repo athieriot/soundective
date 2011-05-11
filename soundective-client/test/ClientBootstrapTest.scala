@@ -10,9 +10,9 @@ import org.mockito.Mockito._
  * Time: 23:28
  */
 
-class BootstrapTest extends UnitTest {
+class ClientBootstrapTest extends UnitTest {
 
-  private var bootstrapTestInstance = new Bootstrap
+  private var bootstrapTestInstance = new ClientBootstrap
 
   private var songFinderTest: SongFinder = mock(classOf[SongFinder])
 
