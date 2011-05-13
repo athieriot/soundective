@@ -1,30 +1,30 @@
-Purpose of this project :
-
-   - Have fun
-   - Learn Scala, Javascript, MongoDB and more, and more...
-
 Goal :
 
     Soundective is a web based Music Player capable of deal with your personnal music collection
     Listen files, organize, search for more informations on internet, etc...
     Like Deezer/Spotify at home
-    But in difference, I want to make these services bi-directionals : All new informations found on your songs can be rewrite in the file. 
+    But in difference, I want to make these services bi-directionals : All new informations found on your songs can be rewrite in the file to have them in your music devices 
+
+Purpose of this project :
+
+   - Have fun 
+   - Learn Scala, Javascript, MongoDB and more, and more...
 
 Next steps :
 
     - Show a scrollable column with all available properties of songs (covert image, etc...)
-    - Refactor Builders with more Types (Change mp3agic library?)
+    - Refactor Builders with more Types (Change mp3agic library? Thinking of JAudioTagger)
     - Fulltext search
     - Keep code coverage nice
+    - Use a more functionnal style
 
-Usage :
+Some fun stuff :
 
-    - Install Play ! Framework
-    - Extract files
-    - Adapt soundective.song.directory property in conf/application.conf if you want
-    - Download dependencies with : play --deps in soundective-core
-    - Then type : ./prod.sh
-    - And your application will be available at http://localhost:9000
+    - Display infos on music
+    - Display twitter channel
+    - Poster
+    - Statistics
+    - ...
 
 Services : 
 
@@ -34,3 +34,12 @@ Services :
     - EchoNest
     - LyricsWiki/
     - Amazon for Cover?
+
+Usage :
+
+    - Install Play ! Framework
+    - Extract files
+    - Adapt soundective.song.directory property in conf/application.conf if you want
+    - Download dependencies with : play --deps in soundective-core
+    - Then type : ./prod.sh
+    - And your application will be available at http://localhost:9000
