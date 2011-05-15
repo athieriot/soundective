@@ -39,8 +39,9 @@ class Mp3SongBuilder extends SongBuilder {
       val tag: Tag = audioFile.getTag
 
       //TODO: Have to clean store directory sometimes (Or on delete)
-      var albumImage = new Blob
-      albumImage.set(new ByteArrayInputStream(tag.getFirstField(FieldKey.COVER_ART).getRawContent), tag.getFirst(FieldKey.COVER_ART))
+      val albumImage = new Blob
+      val albumImageMimeType = audioFile.getTag().getFirstArtwork().getMimeType
+      albumImage.set(new ByteArrayInputStream(audioFile.getTag().getFirstArtwork().getBinaryData), albumImageMimeType)
 
       //TODO: Yerk.
       new Song(songType.mime,
@@ -49,7 +50,7 @@ class Mp3SongBuilder extends SongBuilder {
                tag.getFirst(FieldKey.ALBUM),
                tag.getFirst(FieldKey.ARTIST),
                albumImage,
-               tag.getFirst(FieldKey.COVER_ART),
+               albumImageMimeType,
                tag.getFirst(FieldKey.COMMENT),
                tag.getFirst(FieldKey.COMPOSER),
                tag.getFirst(FieldKey.ENCODER),

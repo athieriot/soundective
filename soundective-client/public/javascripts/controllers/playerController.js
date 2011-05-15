@@ -50,7 +50,9 @@ require.def("controllers/playerController", ["views/player",
             });
         },
 
-        play: this.player.play,
+        play: function() {
+            this.player.play();
+        },
         poll: function() {
             this.trigger('poll');
         }
