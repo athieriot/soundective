@@ -9,11 +9,7 @@ Song(something):
     albumImage: ""
     albumImageMimeType: "image/jpeg"
     composer: "George Harrison"
-    genre: -1
-    genreDescription: "Pop/Rock"
+    genre: "Pop/Rock"
     length: 39946
-    obseleteFormat: false
-    padding: false
     title: "Something"
     track: "2/17"
-    version: "4.0"

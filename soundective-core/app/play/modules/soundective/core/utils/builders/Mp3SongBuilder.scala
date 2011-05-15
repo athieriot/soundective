@@ -7,6 +7,8 @@ import play.modules.soundective.core.utils.SongTypes
 import play.modules.soundective.core.utils.SongTypes.SongType
 import play.db.jpa.Blob
 import java.io.{ByteArrayInputStream, File}
+import org.jaudiotagger.audio.{AudioFileIO, AudioFile}
+import org.jaudiotagger.tag.{FieldKey, Tag}
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,53 +28,48 @@ class Mp3SongBuilder extends SongBuilder {
       return null
     }
 
-    var absolutePath = file.getAbsolutePath
-    var title = file.getName
+    val absolutePath = file.getAbsolutePath
+    val title = file.getName
 
     Logger.info("Starting build song : " + file.getName)
 
 
     try {
-      val mp3file = new Mp3File(file.getAbsolutePath)
-      val tag = mp3file.getId3v2Tag
+      val audioFile: AudioFile = AudioFileIO.read(file)
+      val tag: Tag = audioFile.getTag
 
       //TODO: Have to clean store directory sometimes (Or on delete)
-      var albumImage = new Blob();
-      albumImage.set(new ByteArrayInputStream(tag.getAlbumImage), tag.getAlbumImageMimeType)
+      var albumImage = new Blob
+      albumImage.set(new ByteArrayInputStream(tag.getFirstField(FieldKey.COVER_ART).getRawContent), tag.getFirst(FieldKey.COVER_ART))
 
       //TODO: Yerk.
       new Song(songType.mime,
                songType.name,
                file.getAbsolutePath,
-               tag.getAlbum,
-               tag.getArtist,
+               tag.getFirst(FieldKey.ALBUM),
+               tag.getFirst(FieldKey.ARTIST),
                albumImage,
-               tag.getAlbumImageMimeType,
-               tag.getComment,
-               tag.getComposer,
-               tag.getCopyright,
-               tag.getEncoder,
-               tag.getGenre,
-               tag.getGenreDescription,
-               tag.getItunesComment,
-               tag.getLength,
-               tag.getObseleteFormat,
-               tag.getOriginalArtist,
-               tag.getPadding,
-               tag.getTitle,
-               tag.getTrack,
-               tag.getUrl,
-               tag.getVersion,
-               tag.getYear)
+               tag.getFirst(FieldKey.COVER_ART),
+               tag.getFirst(FieldKey.COMMENT),
+               tag.getFirst(FieldKey.COMPOSER),
+               tag.getFirst(FieldKey.ENCODER),
+               tag.getFirst(FieldKey.GENRE),
+               null,
+               audioFile.getAudioHeader.getTrackLength,
+               tag.getFirst(FieldKey.ORIGINAL_ARTIST),
+               tag.getFirst(FieldKey.TITLE),
+               tag.getFirst(FieldKey.TRACK),
+               tag.getFirst(FieldKey.URL_WIKIPEDIA_ARTIST_SITE),
+               tag.getFirst(FieldKey.YEAR))
 
     } catch {
-      //TODO: FIXME: Do this better. For example, create a SongTemplate to feed in builders
+      //TODO: FIXME: Do this better.
       case e: Exception => return new Song(songType.mime,
                                            songType.name,
                                            file.getAbsolutePath,
-                                           null, null, null, null, null, null, null, null, 0,
-                                           null, null, 0, false, null, false, file.getName,
-                                           null, null, null, null)
+                                           null, null, null, null, null, null, null,
+                                           null, null, 0, null, file.getName,
+                                           null, null, null)
     }
   }
 }

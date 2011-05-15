@@ -2,6 +2,7 @@ require.def("views/player", ["order!external/jquery-1.4.2.min",
                            "order!external/underscore-1.1.6.min",
                            "order!external/backbone-0.3.3.min",
                            "order!external/projekktor-0.8.20.min",
+                           "order!external/speakker.min",
                            "order!external/speakker.min"], function() {
 
     var ids = new Array();

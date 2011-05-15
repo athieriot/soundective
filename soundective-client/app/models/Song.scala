@@ -25,31 +25,21 @@ class Song (
 
   var composer: String,
 
-  var copyright: String,
-
   var encoder: String,
 
-  var genre: Long,
-
-  var genreDescription: String,
+  var genre: String,
 
   var iTunesComment: String,
 
   var length: Long,
 
-  var obseleteFormat: Boolean,
-
   var originalArtist: String,
-
-  var padding: Boolean,
 
   var title: String,
 
   var track: String,
 
   var url: String,
-
-  var version: String,
 
   var year: String
 
