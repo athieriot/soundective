@@ -17,7 +17,7 @@ require.def("controllers/playerController", ["views/player",
 
             this.bind('poll', this.finderStatePolling);
 
-            this.player = new Player({model: new Playlist}).render('.speakkerSmall');
+            this.player = new Player({model: new Playlist}).render();
             this.songView = new SongView({model: new Songs});
             this.finderStateView = new FinderStateView;
 
