@@ -43,7 +43,7 @@ class SongsControllerTest extends FunctionalTest with Browser with Matchers {
     response contentTypeShouldBe("application/json")
     response charsetShouldBe("utf-8")
     response contentShouldBe("[{\"mimeType\":\"" + songToTest.mimeType + "\"," +
-                            "\"songType\":\"" + songToTest.songType + "\"," +
+                            "\"extension\":\"" + songToTest.extension + "\"," +
                             "\"album\":\"" + songToTest.album + "\"," +
                             "\"artist\":\"" + songToTest.artist + "\"," +
                             "\"albumImageMimeType\":\"" + songToTest.albumImageMimeType + "\"," +

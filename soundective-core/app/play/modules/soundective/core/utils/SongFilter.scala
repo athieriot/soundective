@@ -12,10 +12,10 @@ import java.io.{FileFilter, File}
 object SongFilter extends FileFilter {
 
   def accept(file: File): Boolean = {
-    songFilter(file, SongTypes.all)
+    songFilter(file, SupportedSongTypes.all)
   }
 
-  def songFilter(file: File, filters: Seq[AnyRef]): Boolean = {
+  def songFilter(file: File, filters: Seq[String]): Boolean = {
     if(file == null || !file.exists || filters == null) {
       return false
     }
@@ -25,7 +25,7 @@ object SongFilter extends FileFilter {
     var pass = false;
 
     filters.foreach(filter => {
-      if(file.getName.contains(filter.toString))
+      if(file.getName.toLowerCase.contains(filter.toLowerCase))
         pass = true
     })
 

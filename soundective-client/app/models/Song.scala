@@ -9,7 +9,7 @@ class Song (
 
   var mimeType: String,
 
-  var songType: String,
+  var extension: String,
 
   var path: String,
 

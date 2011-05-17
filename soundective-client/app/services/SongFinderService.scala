@@ -3,8 +3,8 @@ package services
 import play.modules.soundective.core.utils.songFinders.SongFinder
 import play.Logger
 import java.io.File
-import play.modules.soundective.core.utils.builders.{SongBuilderFactory, SongBuilder}
-import play.modules.soundective.core.utils.SongTypes
+import play.modules.soundective.core.utils.SupportedSongTypes
+import play.modules.soundective.core.utils.builders.SongBuilder
 import models.Song
 import play.Play.configuration
 import play.db.jpa.{JPA, JPAPlugin}
@@ -42,9 +42,7 @@ object SongFinderService {
   def addSong(file: File) {
     JPAPlugin.startTx(false);
 
-    //TODO: Do not have mp3 here. Big refactoring for music types
-    var songBuilder: SongBuilder = SongBuilderFactory.getSongBuilder(SongTypes.mp3)
-    var song:Song = songBuilder.buildASong(file)
+    val song:Song = SongBuilder.buildASong(file)
 
     if(song != null) {
       if(Song.findByTitle(song.title).isEmpty) song.save()

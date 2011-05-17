@@ -13,7 +13,7 @@ import play.test._
  */
 class SongFilterTest extends UnitTest {
 
-  val testedFilter = List(SongTypes.mp3)
+  val testedFilter = List("mP3")
 
   @Test
   def acceptTestTrue {

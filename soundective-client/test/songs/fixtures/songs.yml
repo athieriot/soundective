@@ -3,7 +3,7 @@
 Song(something):
     path: "test/songs/02 - Something.mp3"
     mimeType: "audio/mpeg"
-    songType: "mp3"
+    extension: "mp3"
     album: "Abbey Road"
     artist: "The Beatles"
     albumImage: ""
