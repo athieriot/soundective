@@ -5,51 +5,38 @@ import javax.persistence._
 import java.io.File
 
 @Entity
-class Song (
+class Song(var mimeType: String,
+           var extension: String,
+           var path: String,
+           var title: String) extends Model {
 
-  var mimeType: String,
+  var album: String = null;
 
-  var extension: String,
+  var artist: String = null;
 
-  var path: String,
+  var albumImage: Blob = null;
 
-  var album: String,
+  var albumImageMimeType: String = null;
 
-  var artist: String,
+  var comment: String = null;
 
-  var albumImage: Blob,
+  var composer: String = null;
 
-  var albumImageMimeType: String,
+  var encoder: String = null;
 
-  var comment: String,
+  var genre: String = null;
 
-  var composer: String,
+  var length: Long = 0;
 
-  var encoder: String,
+  var originalArtist: String = null;
 
-  var genre: String,
+  var track: String = null;
 
-  var iTunesComment: String,
+  var url: String = null;
 
-  var length: Long,
+  var year: String = null
 
-  var originalArtist: String,
-
-  var title: String,
-
-  var track: String,
-
-  var url: String,
-
-  var year: String
-
-) extends Model {
-    //instance methods
-    //var isAdmin = false
-
-    override def toString = title
-
-    def renderFile = new File(path)
+  def renderFile: File = new File(path)
 }
 
 object Song extends QueryOn[Song] {

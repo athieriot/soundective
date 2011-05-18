@@ -4,7 +4,7 @@ require.def("models/songs", ["order!external/underscore-1.1.6.min", "order!exter
 
         url: '/song',
 
-        binarySongUrl: function() {return this.url + '/' + this.get('id') + '.' + this.get('songType');},
+        binarySongUrl: function() {return this.url + '/' + this.get('id') + '.' + this.get('extension');},
 
         albumImageUrl: function() {return this.url + '/' + this.get('id') + '/album-image';}
 

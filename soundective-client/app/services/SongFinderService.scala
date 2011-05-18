@@ -42,7 +42,7 @@ object SongFinderService {
   def addSong(file: File) {
     JPAPlugin.startTx(false);
 
-    val song:Song = SongBuilder.buildASong(file)
+    val song: Song = SongBuilder.buildASong(file).getOrElse(null)
 
     if(song != null) {
       if(Song.findByTitle(song.title).isEmpty) song.save()

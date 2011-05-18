@@ -17,57 +17,52 @@ import play.libs.MimeTypes
 
 object SongBuilder {
 
-  def buildASong(file: File): Song = {
+  def buildASong(file: File): Option[Song] = {
 
-    //TODO: What about monads !!
-    if(file == null || !file.exists || file.length == 0) {
-      return null
+    if(!isFileValid(file)) {
+      return None
     }
 
-    val absolutePath = file.getAbsolutePath
-    val title = file.getName
-    val songMimeType = MimeTypes.getMimeType(title)
-    val songExtension = title.substring(title.lastIndexOf(".") + 1)
+    var resultSong = new Song(MimeTypes.getMimeType(file.getName), file.getName.substring(file.getName.lastIndexOf(".") + 1), file.getAbsolutePath, file.getName)
 
     Logger.info("Starting build song : " + file.getName)
 
     try {
+
       val audioFile: AudioFile = AudioFileIO.read(file)
       val tag: Tag = audioFile.getTag
+      val image = audioFile.getTag().getFirstArtwork()
 
       //TODO: Have to clean store directory sometimes (Or on delete)
-      val albumImage = new Blob
-      val albumImageMimeType = audioFile.getTag().getFirstArtwork().getMimeType
-      albumImage.set(new ByteArrayInputStream(audioFile.getTag().getFirstArtwork().getBinaryData), albumImageMimeType)
+      val albumImageMimeType = image.getMimeType
 
-      //TODO: Yerk.
-      new Song(songMimeType,
-               songExtension,
-               file.getAbsolutePath,
-               tag.getFirst(FieldKey.ALBUM),
-               tag.getFirst(FieldKey.ARTIST),
-               albumImage,
-               albumImageMimeType,
-               tag.getFirst(FieldKey.COMMENT),
-               tag.getFirst(FieldKey.COMPOSER),
-               tag.getFirst(FieldKey.ENCODER),
-               tag.getFirst(FieldKey.GENRE),
-               null,
-               audioFile.getAudioHeader.getTrackLength,
-               tag.getFirst(FieldKey.ORIGINAL_ARTIST),
-               tag.getFirst(FieldKey.TITLE),
-               tag.getFirst(FieldKey.TRACK),
-               tag.getFirst(FieldKey.URL_WIKIPEDIA_ARTIST_SITE),
-               tag.getFirst(FieldKey.YEAR))
+      val albumImage: Blob = new Blob()
+      albumImage.set(new ByteArrayInputStream(image.getBinaryData), albumImageMimeType)
+
+      resultSong.album = tag.getFirst(FieldKey.ALBUM)
+      resultSong.artist = tag.getFirst(FieldKey.ARTIST)
+      resultSong.albumImage = albumImage
+      resultSong.albumImageMimeType = albumImageMimeType
+      resultSong.comment = tag.getFirst(FieldKey.COMMENT)
+      resultSong.composer = tag.getFirst(FieldKey.COMPOSER)
+      resultSong.encoder = tag.getFirst(FieldKey.ENCODER)
+      resultSong.genre = tag.getFirst(FieldKey.GENRE)
+      resultSong.length = audioFile.getAudioHeader.getTrackLength
+      resultSong.originalArtist = tag.getFirst(FieldKey.ORIGINAL_ARTIST)
+      resultSong.title = tag.getFirst(FieldKey.TITLE)
+      resultSong.track = tag.getFirst(FieldKey.TRACK)
+      resultSong.url = tag.getFirst(FieldKey.URL_WIKIPEDIA_ARTIST_SITE)
+      resultSong.year = tag.getFirst(FieldKey.YEAR)
+
 
     } catch {
-      //TODO: FIXME: Do this better.
-      case e: Exception => return new Song(songMimeType,
-                                           songExtension,
-                                           file.getAbsolutePath,
-                                           null, null, null, null, null, null, null,
-                                           null, null, 0, null, file.getName,
-                                           null, null, null)
+      case e: Exception => Logger.debug(e.getMessage)
     }
+
+    return Some(resultSong)
+  }
+
+  def isFileValid(file: File): Boolean = {
+    return file != null && file.exists && file.length > 0
   }
 }
