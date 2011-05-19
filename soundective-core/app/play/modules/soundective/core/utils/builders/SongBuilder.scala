@@ -1,12 +1,14 @@
 package play.modules.soundective.core.utils.builders
 
 import models.Song
-import play.Logger
 import play.db.jpa.Blob
 import java.io.{ByteArrayInputStream, File}
 import org.jaudiotagger.audio.{AudioFileIO, AudioFile}
 import org.jaudiotagger.tag.{FieldKey, Tag}
 import play.libs.MimeTypes
+import play.Logger
+import play.Play.configuration
+import java.util.logging.Level
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,6 +18,8 @@ import play.libs.MimeTypes
  */
 
 object SongBuilder {
+
+  java.util.logging.Logger.getLogger("org.jaudiotagger").setLevel(Level.parse(configuration.get("jaudiotagger.log").asInstanceOf[String]));
 
   def buildASong(file: File): Option[Song] = {
 
