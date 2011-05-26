@@ -18,6 +18,7 @@ import actors.Actor
  */
 
 //TODO: Adapt to connect to other services. Question: Responsibilty to server or client?
+//Go Server, have to do a simple interface for services
 object SongFinderService {
 
   private var globalSongFinder: SongFinder = null

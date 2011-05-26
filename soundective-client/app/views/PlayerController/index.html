@@ -10,6 +10,13 @@
     </li>
     {{/song}}
 </script>
+<script id="artists" type="text/html">
+    {{#artists}}
+    <li>
+        <a class="artist">{{ name }}</a>
+    </li>
+    {{/artists}}
+</script>
 
 <script id="finderState" type="text/html">
         <div>Recherche de fichier : {{ status }}</div>
@@ -38,7 +45,7 @@
         <div class="speakkerSmall"></div>
 
         <h3>Catalogue</h3>
-        <div><ul id="songList"></ul></div>
+        <div><ul id="artistList"></ul></div>
     </aside>
     <article>
         <!--<header>

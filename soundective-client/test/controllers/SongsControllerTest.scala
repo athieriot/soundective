@@ -56,6 +56,17 @@ class SongsControllerTest extends FunctionalTest with Browser with Matchers {
   }
 
   @Test
+  def artistsTest {
+    //One artist in tests : The Beatles
+
+    val response = GET("/artists")
+    response shouldBeOk()
+    response contentTypeShouldBe("application/json")
+    response charsetShouldBe("utf-8")
+    response contentShouldBe("[\"" + songToTest.artist + "\"]")
+  }
+
+  @Test
   def songAlbumImageTest {
     songToTest.albumImage = blobToTest
     songToTest.save

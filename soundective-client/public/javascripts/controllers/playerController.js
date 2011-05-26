@@ -1,11 +1,12 @@
 require.def("controllers/playerController", ["views/player",
+                           "models/artists",
                            "models/songs",
                            "models/playlist",
-                           "views/songView",
+                           "views/artistView",
                            "views/finderStateView",
                            "order!external/jquery-1.4.2.min",
                            "order!external/underscore-1.1.6.min",
-                           "order!external/backbone-0.3.3.min"], function(Player, Songs, Playlist, SongView, FinderStateView) {
+                           "order!external/backbone-0.3.3.min"], function(Player, Artists, Songs, Playlist, ArtistView, FinderStateView) {
 
     var PlayerController = Backbone.Controller.extend({
         standardPollingDelay: 10000,    //10s
@@ -18,13 +19,17 @@ require.def("controllers/playerController", ["views/player",
             this.bind('poll', this.finderStatePolling);
 
             this.player = new Player({model: new Playlist}).render();
-            this.songView = new SongView({model: new Songs});
+            this.artistView = new ArtistView({model: new Artists});
             this.finderStateView = new FinderStateView;
 
-            this.songView.model.fetch({
+            this.artistView.model.fetch({
                 success: _.bind(function(data) {
-                    $('#songList').append(this.songView.render().el);
+                    $('#artistList').html(this.artistView.render().el);
+                }, this)
+            });
 
+            new Songs().fetch({
+                success: _.bind(function(data) {
                     this.player.model.addSongs(data);
                 }, this)
             });

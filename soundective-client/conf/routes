@@ -6,7 +6,8 @@
 GET     /                                       PlayerController.index
 
 # Lists
-GET     /songs                                  SongsController.list
+GET     /songs                                  SongsController.songList
+GET     /artists                                SongsController.artistList
 
 # Thing
 GET     /song/{id}/album-image                  SongsController.albumImage

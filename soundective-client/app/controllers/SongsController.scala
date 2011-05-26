@@ -38,9 +38,13 @@ object SongsController extends Controller {
     }
   }
 
-  def list = {
+  def songList = {
     Logger.debug("Your are in the SongsController and there are " + Song.count.toString + " songs in the database")
 
     new RenderJson(new ScalaGsonSerializer().exclude("path, albumImage").toJson(Song.findAll))
+  }
+
+  def artistList = {
+    new RenderJson(new ScalaGsonSerializer().toJson(Song.findAll.map(_.artist).distinct))
   }
 }
